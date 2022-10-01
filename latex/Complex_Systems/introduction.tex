@@ -1,5 +1,9 @@
-\section{Introduction to complex systems}
-One of the main ideas in complex systems is emergence. Emergence means that the structure of the particles is simple and depends on the interaction. \\
+\chapter{Introduction to Complex Systems}
+Complex systems are interdisciplinary: you have to communicate your results to experts from different science field.
+You need to provide an easy answer to a complex problem, no matter how difficult it's to get this answer.
+
+\section{Emergence}
+One of the main ideas in complex systems is emergence. Emergence means that the structure of the particles is simple and they are not so important like interactions bettween them. \\
 An example of this is the Central limit therem, which comes from mathematics. \\
 If you have a random variable $x_k$, with average value $\lang x_k \rang = 0$ and finite variance $\sigma^2$, then the central limit theorem says that, if the variables are independent (and in physics this is usally a fair assumption) for every value of $k$, then the normalized sum 
 $$
@@ -9,12 +13,23 @@ then the distribution of this variable $z_n$ is known, and it is gaussian, for a
 $$
 	\rho(z_n) \sim \exp\left(-\frac{z^2}{2\sigma^2}\right)
 $$
-The gaussian describes the fluctuations of a system at equilibriom, not the complexity. \\
+Despite we, as humans, need a cause-effect relationship to describe a phenomenon, nature loves independent events, like DNA mutations.
+The gaussian describes the fluctuations of a system at equilibrium, not the complexity. You cannot extract work from fluctuations at equilibrium, otherwise you violate thermodynamics (and that's no good). \\
 The gaussian function is not a physical function, because it implies non zero probabilities to events which are impossible. For example, if we take a particle in a basin of attraction of a potential, the non zero probability given by the gaussian fluctuations allows the particle to jump out of the pit. But this violates the second law of thermodynamics. \\ \\
-A way to defy the gaussian properties is to allow a system to have memory, so to remove the independence of the variable. \\
-One example of this is the sand pile model. You have a lattive, and each point is connected to its four neighbors. At this point one particle is put in a randomly chosen point. Each node can have four possible states, $0,1,2,3$, that is four possible numbers of particles. If a node reaches 4 particles, the 4 particles are distributed to the 4 neightbouring nodes. For the nodes in the border, what happens is that 2 of the particles are redistributed and the other 2 are released in the enviroment, so they are lost. \\
+A way to define the gaussian properties is to allow a system to have memory, so to remove the independence of the variable. \\
+One example of this is the sand pile model. You have a lattice, and each point is connected to its four neighbors. At this point one particle is put in a randomly chosen point. Each node can have four possible states, $0,1,2,3$, that is four possible numbers of particles. If a node reaches 4 particles, the 4 particles are distributed to the 4 neightbouring nodes. For the nodes in the border, what happens is that 2 of the particles are redistributed and the other 2 are released in the enviroment, so they are lost. \\
 So this system has memory, and this means that the states of all the nodes are not independent. This memory turns the gaussian distribution into a power law
 $$
 	p(n) \propto n^{-\alpha}
 $$
+with $\alpha > 1$. \\
 The decay of the power low is much much slower than that of the gaussian, which means that the probability to have events in the extremes is significantly higher with the power low distribution.
+Memory is related to power laws, but viceversa is not guaranteed.
+We can also have power laws in physics, for example in the Ising model.
+In physics, power laws tipically represent a phase transition for a dynamic system in a non-equilibrium state. \\
+In the sand pile model, we notice a self-organized criticality: the system naturally goes into a critical state and does a phase transition. \\
+Another example of a natural power law is the Kleiber law wich relates the metabolic rate (amount of energy you need to survive) to the mass.
+\begin{equation}
+	E(m) \propto m^{\frac{4}{3}}
+\end{equation}
+We can also observe that heartbeat rate decreases with mass and lifetime increases.
