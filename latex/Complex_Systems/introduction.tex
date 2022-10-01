@@ -1,0 +1,22 @@
+\section{Introduction to complex systems}
+One of the main ideas in complex systems is emergence. Emergence means that the structure of the particlesis simple and depends on the interaction. \\
+An example of this comes from mathematics. 
+If you have a random variable $x_k$, with average value $\lang x_k \rang = 0$ and finite variance $\sigma^2$. \\
+Then the central limit theorem says that, if the variables are independent (and in physics this is usally a fair assumption) for every value of $k$, then the normalized sum 
+$$
+	z_n = \frac{1}{\sqrt{N}}\sum_{k=0}^N x_k
+$$
+then the distribution of this variable $z_n$ is known, and it is gaussian, for a big enough value of $N$.
+$$
+	\rho(z_n) \sim \exp\left(-\frac{z^2}{2\sigma^2}\right)
+$$
+The gaussian describes the fluctuations of a system at equilibriom, not the complexity. \\
+The gaussian function is not a physical function, because it implies non zero probabilities to events which are impossible. \\ \\
+For example, if we take a particle in a basin of attraction of a potential, the non zero probability given by the gaussian fluctuations allows the particle to jump out of the pit. But this violates the second law of thermodynamics. \\ \\
+A way to defy the gaussian properties is to allow a system to have memory, so to remove the independence of the variable. \\
+One example of this is the sand pile model. You have a lattive, and each point is connected to its four neighbors. At this point one particle is put in a randomly chosen point. Each node can have four possible states, $0,1,2,3$, that is four possible numbers of particles. If a node reaches 4 particles, the 4 particles are distributed to the 4 neightbouring nodes. For the nodes in the border, what happens is that 2 of the particles are redistributed and the other 2 are released in the enviroment, so they are lost. \\
+So this system has memory, and this means that the states of all the nodes are not independent. This memory turns the gaussian distribution into a power law
+$$
+	p(n) \propto n^{-\alpha}
+$$
+The decay of the power low is much much slower than that of the gaussian, which means that the probability to have events in the extremes is significantly higher with the power low distribution.
