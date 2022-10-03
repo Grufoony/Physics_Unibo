@@ -1,3 +1,5 @@
+# Made by SimonB00
+
 import random as rnd
 import time 
 import os

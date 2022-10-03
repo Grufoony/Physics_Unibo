@@ -1,3 +1,5 @@
+# Made by Grufoony
+
 import random as rnd
 import time 
 import os
@@ -35,29 +37,28 @@ class board:
 			neighbors.append([pos - self.ncols])
 		return neighbors
 	def evolve(self):
-		for row in range(self.nrows):
-			for col in range(self.ncols):
-				pos = col + self.ncols*row
-				neighbour = rnd.choice(self.neighbors(pos))[0]
-				if rnd.uniform(0,1) < 0.5:
-					self.nodes[pos] += 1
-					if self.nodes[neighbour] > 0:
-						self.nodes[neighbour] -= 1
-				else:
-					if self.nodes[pos] > 0:
-						self.nodes[pos] -= 1
-					self.nodes[neighbour] += 1
+		for pos in range(len(self.nodes)):
+			neighbour = rnd.choice(self.neighbors(pos))[0]
+			if rnd.uniform(0,1) < 0.5:
+				self.nodes[pos] += 1
+				if self.nodes[neighbour] > 0:
+					self.nodes[neighbour] -= 1
+			else:
+				if self.nodes[pos] > 0:
+					self.nodes[pos] -= 1
+				self.nodes[neighbour] += 1
 	def data(self):
-		x = np.arange(0, max(self.nodes))
-		y = np.zeros(max(self.nodes))
+		x = np.arange(0, max(self.nodes)+1)
+		y = np.zeros(max(self.nodes)+1)
 		for element in self.nodes:
-			y[element-1] += 1
+			y[element] += 1
 		return x,y
 		
 myboard = board(100, 100)	
 
-for i in range(25):
+for i in range(99):
 	myboard.evolve()	
+myboard.nodes.sort()
 data = myboard.data()
 plt.plot(data[0],data[1])
 plt.show()
