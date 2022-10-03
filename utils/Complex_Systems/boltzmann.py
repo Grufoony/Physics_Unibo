@@ -58,7 +58,6 @@ myboard = board(100, 100)
 
 for i in range(99):
 	myboard.evolve()	
-myboard.nodes.sort()
 data = myboard.data()
 plt.plot(data[0],data[1])
 plt.show()
