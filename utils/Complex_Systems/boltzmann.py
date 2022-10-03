@@ -7,10 +7,10 @@ import numpy as np
 import matplotlib.pyplot as plt
  
 class board:
-	def __init__(self,nrows=5,ncols=5):
+	def __init__(self,nrows=5,ncols=5,pocket=5):
 		self.nrows = nrows
 		self.ncols = ncols
-		self.nodes = [5 for i in range(nrows*ncols)]
+		self.nodes = [pocket for i in range(nrows*ncols)]
 	def print(self):
 		i = 0
 		for element in self.nodes:
@@ -22,23 +22,23 @@ class board:
 	def neighbors(self,pos):
 		neighbors = []
 		if pos in range(0,self.ncols*self.nrows,self.ncols):
-			neighbors.append([pos + 1])
+			neighbors.append(pos + 1)
 		elif pos in range(self.ncols-1,self.ncols*self.nrows,self.ncols):
-			neighbors.append([pos - 1])
+			neighbors.append(pos - 1)
 		else:
-			neighbors.append([pos + 1])
-			neighbors.append([pos - 1])
+			neighbors.append(pos + 1)
+			neighbors.append(pos - 1)
 		if pos in range(self.ncols):
-			neighbors.append([pos + self.ncols])
+			neighbors.append(pos + self.ncols)
 		elif pos in range(self.ncols*(self.nrows-1),self.ncols*self.nrows):
-			neighbors.append([pos - self.ncols])
+			neighbors.append(pos - self.ncols)
 		else:
-			neighbors.append([pos + self.ncols])
-			neighbors.append([pos - self.ncols])
+			neighbors.append(pos + self.ncols)
+			neighbors.append(pos - self.ncols)
 		return neighbors
 	def evolve(self):
 		for pos in range(len(self.nodes)):
-			neighbour = rnd.choice(self.neighbors(pos))[0]
+			neighbour = rnd.choice(self.neighbors(pos))
 			if rnd.uniform(0,1) < 0.5:
 				self.nodes[pos] += 1
 				if self.nodes[neighbour] > 0:
