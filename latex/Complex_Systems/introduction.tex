@@ -275,4 +275,82 @@ $$
 	E_T = d\phi N \log_2(N)
 $$
 This configuration is much more efficient than the previous alternative, although it is impossible to put to practice. \\ \\ 
-So we need to find a solution that is in the middle of these two. 
+So we need to find a solution that is in the middle of these two. \\ \\
+Another possible structure consists of connecting all the nodes to the source, but this is of course impossible in practice. \\
+In this case the total energy required is proportional to $NL$. 
+$$
+	E_T \propto NL
+$$
+The proportionality to L is due to the fact that the average length of the links is proportional to the size of the space, and so it's proportional to L. \\
+Since 
+$$
+	N = \left(\frac{L}{l} \right)^D
+$$
+we have that
+$$
+	E_T \propto N\overline{L} \approx N^{1+1/D} = V^{\frac{D+1}{D}}
+$$
+where the exponent is usally $3/2$ or $4/3$. \\
+This is not good, because the energy required to power the entire system increases very quickly with its size. \\
+The problem is also logistic, because in a real transportation line there is also waste, that has to be disposed of. \\ \\
+If we consider our system to be an animal's body, this would mean that in order to survive the amount of blood in its body must grow with the size by an amount of $4/3$. This would mean that very big animals can't survive, but they do, and the solution is in Kleiber's law. \\
+As animals get bigger, their demand of energy goes down, so their metabolism slows down.  
+
+
+
+Once we have a model (which hopefully is a good one), the model is deterministic, so if we know the initial conditions os the system, we know exactly what state the system will have at any future time. \\
+The problem with this is that we don't know the initial conditions with absolute certainty. So at this point the question, that will be answered later, is: \\
+How much error in the initial conditions is acceptable before that the previsions of our model start to diverge from the real evolution in an unacceptable way?
+
+
+Laplace problem
+You are tossing a coin. You get H with probability p and T with probability 1-p.The event $E$ is $n+1$ outcome, and $H_n$ is $\{x_1,x_2,...\}$, so the first is the future and the second is the past. \\
+What is the probability
+$$
+	p(x_{n+1}=H | H_n) / ? % (nh + 1)/(N + 2)
+$$
+If we take the number of times where we get H, $n_H$, then we define $p$ as
+$$
+	p = \frac{n_H}{N}
+$$
+for $N > 1$.
+
+We consider a discrete dynamical variable $x_k$. \\
+The probability of a state can then be calculated as
+$$
+	p(x_k) = \frac{1}{T}\sum_t \delta(x(t)-x_k)
+$$
+The observation is $x(t)$, and our model (that we want to validate) is $y(t)$. Then the predictability of the model is
+$$
+	\pi_y = \frac{1}{T}\sum_t \delta(x(t)-y(t))
+$$
+We can also calculate the predictability as the probability of obtaining the obserated dynamics with our model
+$$
+	\pi_y = \left(p_y(x(t))\right)^\frac{1}{T}
+$$
+If we define the probability $p_k$, which is the probability of getting the state $x_k$, we define the probability as
+$$
+	p_y(x(t)) = \left(\Pi_{k=1}^N p_k \right)\frac{1}{T}
+$$
+So the predictability is
+$$
+	\pi_y = \Pi_{k=1}^N p_k^{p_k}
+$$
+and by doing the logarithm we get
+$$
+	\log(\pi_y) = \sum_{k=1}^N p_k\log(p_k) = -S
+$$
+which is Gibbs entropy.
+	
+
+
+
+
+
+
+
+
+
+
+
+
