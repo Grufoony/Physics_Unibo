@@ -5,6 +5,7 @@ import time
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+import boltzmann as b
  
 class board:
 	def __init__(self,nrows=5,ncols=5,pocket=5):
@@ -21,16 +22,16 @@ class board:
 				i = 0
 	def neighbors(self,pos):
 		neighbors = []
-		if pos in range(0,self.ncols*self.nrows,self.ncols):
+		if pos % self.ncols == 0: 
 			neighbors.append(pos + 1)
-		elif pos in range(self.ncols-1,self.ncols*self.nrows,self.ncols):
+		elif (pos+1) % self.ncols == 0:
 			neighbors.append(pos - 1)
 		else:
 			neighbors.append(pos + 1)
 			neighbors.append(pos - 1)
-		if pos in range(self.ncols):
+		if pos < self.ncols:
 			neighbors.append(pos + self.ncols)
-		elif pos in range(self.ncols*(self.nrows-1),self.ncols*self.nrows):
+		elif (pos >= self.ncols*(self.nrows - 1)) and (pos < self.ncols*self.nrows):
 			neighbors.append(pos - self.ncols)
 		else:
 			neighbors.append(pos + self.ncols)
@@ -54,10 +55,17 @@ class board:
 			y[element] += 1
 		return x,y
 		
-myboard = board(100, 100)	
+myboard = board(50, 50)	
 
 for i in range(99):
+	start = time.time_ns()
 	myboard.evolve()	
+	finish = time.time_ns()
+	print("el",(finish-start)/1000000000)
 data = myboard.data()
 plt.plot(data[0],data[1])
+plt.show()
+
+cdata = b.simulate(100,100,5) 
+plt.plot(cdata[0],cdata[1])
 plt.show()
