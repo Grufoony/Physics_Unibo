@@ -1,37 +1,29 @@
-You are tossing a coin. You get H with probability p and T with probability 1-p.The event $E$ is $n+1$ outcome, and $H_n$ is $\{x_1,x_2,...\}$, so the first is the future and the second is the past. \\
-What is the probability
+Let's suppose that we are tossing a coin, and the probability of gettin head is $p$ and the probability of getting tails is $1-p$. The event $E$ is $x_{n+1}$ outcome, and $H_n$ is $\{x_1,x_2,...\}$, so the first is the future and the second is the past. \\
+Now we ask ourselves what is the probability that the next result of the toss is going to be heads:
 $$
-	p(x_{n+1}=H | H_n) / ? % (nh + 1)/(N + 2)
+	p(x_{n+1}=H | H_n) 
 $$
-If we take the number of times where we get H, $n_H$, then we define $p$ as
+The most intuitive way to calculate this probability would be to use the frequentistic definition, so to count how many times we have gotten heads over the entire number of tries (we are considering the number of tries to be very big of course)
 $$
 	p = \frac{n_H}{N}
 $$
-for $N > 1$.
-
-We consider a discrete dynamical variable $x_k$. \\
-The probability of a state can then be calculated as
+Unfortunately, this is not the right way to do it. \\ \\
+The probability of getting a given sequence of heads and tails is
 $$
-	p(x_k) = \frac{1}{T}\sum_t \delta(x(t)-x_k)
+	p(\{x_k\}) = p^J(1-p)^{n-J}
 $$
-The observation is $x(t)$, and our model (that we want to validate) is $y(t)$. Then the predictability of the model is
+where $J$ is the number of times that we get heads. \\
+Now if we integrate we get
 $$
-	\pi_y = \frac{1}{T}\sum_t \delta(x(t)-y(t))
+	\int_0^1 p^J(1-p)^{n-J}dp = \frac{J!(n-J)!}{(n+1)!}
 $$
-We can also calculate the predictability as the probability of obtaining the obserated dynamics with our model
+so
 $$
-	\pi_y = \left(p_y(x(t))\right)^\frac{1}{T}
+	p(x_{n+1}=H|\{\}) = \frac{(n+1)!}{J!(n-J)!}p^J(1-p)^{n-J}
 $$
-If we define the probability $p_k$, which is the probability of getting the state $x_k$, we define the probability as
+which is a binomial distribution. \\
+Now we calculate the average value of the probability
 $$
-	p_y(x(t)) = \left(\Pi_{k=1}^N p_k \right)\frac{1}{T}
+\int_0^1 p\frac{(n+1)!}{J!(n-J)!}p^J(1-p)^{n-J}dp = \frac{J+1}{n+2}
 $$
-So the predictability is
-$$
-	\pi_y = \Pi_{k=1}^N p_k^{p_k}
-$$
-and by doing the logarithm we get
-$$
-	\log(\pi_y) = \sum_{k=1}^N p_k\log(p_k) = -S
-$$
-which is Gibbs entropy.
+and we see that it isn't $J/n$, as one would have expected. 
