@@ -11,6 +11,7 @@
 \usepackage{braket}
 \usepackage[margin=3cm]{geometry}
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage{fancyhdr}
 \usepackage{physics}
 \usepackage{systeme,mathtools}
@@ -50,17 +51,24 @@
 \pagebreak
 
 \chapter{Introduction to Complex Systems}
-\input{introduction}
+Complex systems are interdisciplinary: you have to communicate your results to experts from different science field.
+You need to provide an easy answer to a complex problem, no matter how difficult it's to get this answer.
+\section{Emergence}
+\input{emergence}
+\section{Network's energy}
+\input{energy}
 \section{Broken Stick Model}
 \input{brokenstick}
+\section{Rankings}
+\input{ranking}
 \section{Laplace problem}
 \input{laplace}
-\chapter{Rankings}
-\input{ranking}
 \chapter{Basic models}
 \section{Linear models}
 \input{models}
 \section{The neuron model}
 \input{neuron}
+\subsection{Hopf Bifurcation}
+\input{hopf}
 
 \end{document}
