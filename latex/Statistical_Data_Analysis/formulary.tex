@@ -175,6 +175,10 @@ Moments of Characteristic function:
 \end{equation}
 \section{Important distributions}
 \subsection{Binomial distribution}
+Characteristic function:
+\begin{equation}
+	\phi_p(k)=p\left[\left(e^{ik}-1\right)+1\right]^N
+\end{equation}
 Distribution:
 \begin{equation}
 	f(n;N,p) = \frac{N!}{n!(N-n)!}p^n(1-p)^{N-n}
@@ -188,6 +192,10 @@ Variance:
 	V[n] = Np(1-p)
 \end{equation}
 \subsection{Poisson distribution}
+Characteristic function:
+\begin{equation}
+	\phi_\nu(k)=e^{\nu\left(e^{ik}-1\right)}
+\end{equation}
 Distribution:
 \begin{equation}
 	f(n;\nu) = \frac{\nu^n}{n!}e^{\nu}
@@ -201,6 +209,10 @@ Variance:
 	V[n] = \nu
 \end{equation}
 \subsection{Uniform distribution}
+Characteristic function:
+\begin{equation}
+	\phi_{\alpha,\beta}(k)=\frac{e^{i\beta k}-e^{i\alpha k}}{\left(\beta-\alpha\right)ik}
+\end{equation}
 Distribution:
 \begin{equation}
 	f(x;\alpha,\beta) = \frac{1}{\beta-\alpha} \ for \ \alpha \leq x \leq \beta 
@@ -214,6 +226,10 @@ Variance:
 	V[x] = \frac{(\beta - \alpha)^2}{12}
 \end{equation}
 \subsection{Exponential distribution}
+Characteristic function:
+\begin{equation}
+	\phi_\xi(k)=\frac{1}{1-ik\xi}
+\end{equation}
 Distribution:
 \begin{equation}
 	f(x;\xi) = \frac{1}{\xi}e^{-x/\xi} \ for \ x \geq 0
@@ -226,7 +242,11 @@ Variance:
 \begin{equation}
 	V[x] = \xi^2
 \end{equation}
-\subsection{Gaussian distribution}
+\subsection{Gaussian distribution}ù
+Characteristic function:
+\begin{equation}
+	\phi_{\mu,\sigma}(k)=e^{i\mu k-\frac{1}{2}\sigma^2k^2}
+\end{equation}
 Distribution:
 \begin{equation}
 	f(x;\mu,\sigma) = \frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
@@ -245,6 +265,10 @@ Distribution:
 	f(\vx;\vec{mu},V) = \frac{1}{(2\pi)^{n/2}|V|^{1/2}}\exp\left(-\frac{1}{2}(\vx - \vec{\mu})^tV^{-1}(\vx - \vec{\mu})\right)
 \end{equation}
 \subsection{Chi-square distribution}
+Characteristic function:
+\begin{equation}
+	\phi_n(k)=\left(1-2ik\right)^{-\frac{n}{2}}
+\end{equation}
 Distribution:
 \begin{equation}
 	f(z;n) = \frac{1}{2^{n/2}\Gamma(n/2)}z^{n/2-1}e^{-z/2}
@@ -257,7 +281,11 @@ Variance:
 \begin{equation}
 	V[z] = 2n
 \end{equation}
-\subsection{Cauchy distribution}
+\subsection{Cauchy (Breit-Wigner) distribution}
+Characteristic function:
+\begin{equation}
+	\phi_{x_0,\Gamma}(k)=e^{-ikx_0-\left\lvert k\right\rvert \frac{\Gamma}{2}}
+\end{equation}
 Distribution:
 \begin{equation}
 	f(x;\Gamma,x_0) = \frac{1}{\pi}\frac{\Gamma/2}{\Gamma^2/4 + (x-x_0)^2}
