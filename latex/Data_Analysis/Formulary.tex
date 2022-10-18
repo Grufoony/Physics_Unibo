@@ -203,7 +203,7 @@ Variance:
 \subsection{Uniform distribution}
 Distribution:
 \begin{equation}
-	f(x;\alpha,\beta) = 
+	f(x;\alpha,\beta) = \frac{1}{\beta-\alpha} \ for \ \alpha \leq x \leq \beta 
 \end{equation}
 Expectation value:
 \begin{equation}
@@ -216,7 +216,7 @@ Variance:
 \subsection{Exponential distribution}
 Distribution:
 \begin{equation}
-	f(x;\xi)
+	f(x;\xi) = \frac{1}{\xi}e^{-x/\xi} \ for \ x \geq 0
 \end{equation}
 Expectation value:
 \begin{equation}
@@ -229,7 +229,7 @@ Variance:
 \subsection{Gaussian distribution}
 Distribution:
 \begin{equation}
-	f(x;\mu,\sigma)
+	f(x;\mu,\sigma) = \frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 \end{equation}
 Expectation value:
 \begin{equation}
@@ -242,30 +242,30 @@ Variance:
 \subsection{Multivariate Gaussian distribution}
 Distribution:
 \begin{equation}
-	f(\vx;\vec{mu},V)
+	f(\vx;\vec{mu},V) = \frac{1}{(2\pi)^{n/2}|V|^{1/2}}\exp\left(-\frac{1}{2}(\vx - \vec{\mu})^tV^{-1}(\vx - \vec{\mu})\right)
 \end{equation}
 \subsection{Chi-square distribution}
 Distribution:
 \begin{equation}
-	f()
+	f(z;n) = \frac{1}{2^{n/2}\Gamma(n/2)}z^{n/2-1}e^{-z/2}
 \end{equation}
 Expectation value:
 \begin{equation}
-	E[]
+	E[z] = n
 \end{equation}
 Variance:
 \begin{equation}
-	V[]
+	V[z] = 2n
 \end{equation}
 \subsection{Cauchy distribution}
 Distribution:
 \begin{equation}
-	f()
+	f(x;\Gamma,x_0) = \frac{1}{\pi}\frac{\Gamma/2}{\Gamma^2/4 + (x-x_0)^2}
 \end{equation}
 \subsection{Student's t distribution}
 Distribution:
 \begin{equation}
-	f()
+	f(x;\nu) = \frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\sqrt{\nu\pi}\Gamma(\nu/2)}\left(1+ \frac{x^2}{\nu}\right)^{-\left(\frac{\nu+1}{2}\right)}
 \end{equation}
 Expectation value:
 \begin{equation}
