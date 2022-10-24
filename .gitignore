@@ -1,5 +1,6 @@
 ## Repository organization
 latex/*/*.pdf
+*.dat
 
 
 ## Core latex/pdflatex auxiliary files:
