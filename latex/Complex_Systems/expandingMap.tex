@@ -20,6 +20,7 @@ $$
     T\left(x + \epsilon\right)=2^n\left(x + \epsilon\right)\mod{1}
 $$
 so the difference grows $\propto 2^n\epsilon$.
+One last comment to make is that it's true that the two orbit exponentially diverges one from the other but the phase space is limited: from this point of view their distance in phase space will oscillate through time.
 
 
 \begin{prop}
@@ -37,3 +38,17 @@ so the difference grows $\propto 2^n\epsilon$.
 \begin{prop}
     If two points p and q are part of the same periodic orbit then they are both of the same type.
 \end{prop}
+\begin{proof}
+    Let's consider an orbit of period $j$ with $q=T^k\left(p\right)$, $0 < k \leq j-1$.
+    $$
+        \left(T^j\right)'\left(p\right) = T'\left(p_0\right)\ldots T'\left(p_{j-1}\right)
+    $$
+    $$
+        \left(T^j\right)'\left(q\right) = \left(T^j\right)'\left(p_k\right) T'\left(p_k\right)\ldots T'\left(p_{k-1}\right) \ldots T'\left(p_{k+j-1}\right)
+    $$
+    Real numbers always commute, so it's obvious that
+    $$
+        \left(T^j\right)'\left(q\right) = \left(T^j\right)'\left(p\right)
+    $$
+\end{proof}
+We have just shown that the property of a point (local) is also a property of an orbit (global).
