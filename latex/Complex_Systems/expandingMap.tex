@@ -1,0 +1,39 @@
+Now let's see an example of a chaotic map.
+First of all, we define a map $T$ as \emph{expanding} if $\left\lvert T'\left(x\right)\right\rvert > 1$ $\forall x \in \mathcal{M}$. \\
+For example, let's take the map $T : \left[0,1\right] \to \left[0,1\right]$ such as $T\left(x\right)=2x \mod{1}$.
+This map as two fixed points (intersection with the bisectrice): $p_0 = \left(0,0\right)$ and $p_1 = \left(1,1\right)$.
+We notice immediately that those points are both \emph{repelling} points.
+Another thing we can see with this particular map is that if we start on a slightly different point from the previous one, for example $x \to x + \epsilon$, the difference between the two orbit grows exponentially fast:
+$$
+    T^n\left(x\right)=2^n\left(x-k\left(x\right)\right)-k\left(T\left(x\right)\right)
+$$
+where
+$$
+    k\left(x\right)=
+    \begin{cases}
+        0 \quad 0\leq x \leq \frac{1}{2} \\
+        1 \quad \frac{1}{2} < x \leq 1
+    \end{cases}
+$$
+and in conclusion we have that
+$$
+    T\left(x + \epsilon\right)=2^n\left(x + \epsilon\right)\mod{1}
+$$
+so the difference grows $\propto 2^n\epsilon$.
+
+
+\begin{prop}
+    If $T : \left[0,1\right] \to \left[0,1\right]$ is an expanding map such as $\left\lvert T'\left(x\right)\right\rvert > 1$ $\forall x \in \left[0,1\right]$ then any point p of $T^j$ ($j \in \mathbb{Z}$) is repelling.
+\end{prop}
+\begin{proof}
+    $$
+        \left(T^j\right)'\left(x\right)=\prod_{k=0}^{j-1}T'\left(T^k\left(x\right)\right)
+    $$
+    so
+    $$
+        \left\lvert\left(T^j\right)'\left(x\right)\right\rvert = \prod_{k=0}^{j-1}\left\lvert T'\left(T^k\left(x\right)\right)\right\rvert >> 1
+    $$
+\end{proof}
+\begin{prop}
+    If two points p and q are part of the same periodic orbit then they are both of the same type.
+\end{prop}
