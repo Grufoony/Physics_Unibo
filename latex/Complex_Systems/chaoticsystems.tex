@@ -1,0 +1,25 @@
+% classification of chaotic systems
+Let $\pi^1$ be a one-dimensional thorus (a circle). Now we define the transformations $R_\alpha : \pi^1 \rightarrow \pi^1$, $R_\alpha(x) = x + \alpha (mod \ 1)$, which are called rotations by an "angle" $\alpha$. \\
+Now, if $\alpha = p/q$, with $gcd(p,q)=1$, then:
+\begin{itemize}
+	\item all orbits are periodic with fundamental period $q$. 
+	\item if $\alpha$ is not rational, then all orbits are dense. 
+\end{itemize}
+\begin{proof}
+	\begin{itemize}
+		\item We consider that $R^n_\alpha(x)=x$ is equivalent to $x + n\alpha (mod \ 1) = x$, so 
+		$$ x + np/q (mod \ 1) = x
+		$$
+		which means that, 
+		$$
+			np/q = k \ \longrightarrow	\ n = \frac{kq}{p}
+		$$
+		and for $n$ to be an integer, p needs to be simplified, but it can't be simplified with $q$, so it simplifies with $k$, which is then equal to $k = mp$. So in the end we get
+		$$
+			n = mq
+		$$
+		\item In order to prove that all orbits are dense, we prove that they are $\varepsilon-dense$ for all $\varepsilon$. \\
+		Since $\alpha$ is not rational, the orbit must be infinite, because it is not periodic. Then, we can say that there is at least one accumulation point in the orbit. \\
+		Now, call $j = n - m$, then we can say that $\{R^{k_j}_\alpha\}_k$ is $\varepsilon-dense$ in $\pi^1$, which means that the orbit is dense.
+	\end{itemize}
+\end{proof}
