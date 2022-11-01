@@ -1,5 +1,14 @@
 Now let's see an example of a chaotic map.
-First of all, we define a map $T$ as \emph{expanding} if $\left\lvert T'\left(x\right)\right\rvert > 1$ $\forall x \in \mathcal{M}$. \\
+First of all, we define a map $T$ as \emph{expanding} if $\left\lvert T'\left(x\right)\right\rvert > 1$ $\forall x \in \mathcal{M}$.
+As well, we also give this definition for a generic point:
+\begin{definition}
+    We define a periodic point of the map $x_0 \in \mathcal{M}$ as:
+    \begin{itemize}
+        \item \emph{attractive} if $\left\lvert T'\left(x_0\right)\right\rvert > 1$
+        \item \emph{repelling} if $\left\lvert T'\left(x_0\right)\right\rvert < 1$
+        \item \emph{neutral} if $\left\lvert T'\left(x_0\right)\right\rvert = 0$
+    \end{itemize}
+\end{definition}
 For example, let's take the map $T : \left[0,1\right] \to \left[0,1\right]$ such as $T\left(x\right)=2x \mod{1}$.
 This map as two fixed points (intersection with the bisectrice): $p_0 = \left(0,0\right)$ and $p_1 = \left(1,1\right)$.
 We notice immediately that those points are both \emph{repelling} points.
