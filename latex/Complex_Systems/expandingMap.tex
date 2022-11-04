@@ -27,13 +27,15 @@ One last comment to make is that it's true that the two orbit exponentially dive
     If $T : \left[0,1\right] \to \left[0,1\right]$ is an expanding map such as $\left\lvert T'\left(x\right)\right\rvert > 1$ $\forall x \in \left[0,1\right]$ then any point p of $T^j$ ($j \in \mathbb{Z}$) is repelling.
 \end{prop}
 \begin{proof}
-    $$
-        \left(T^j\right)'\left(x\right)=\prod_{k=0}^{j-1}T'\left(T^k\left(x\right)\right)
-    $$
-    so
-    $$
-        \left\lvert\left(T^j\right)'\left(x\right)\right\rvert = \prod_{k=0}^{j-1}\left\lvert T'\left(T^k\left(x\right)\right)\right\rvert >> 1
-    $$
+	If we take the derivative of $T^j$ we get
+	$$
+		(T^j)'(x) = T'(T^{j-1}(x))\times T'(T^{j-2}(x))\times...\times T'(x) = \prod_{k=0}^{j-1}T'\left(T^k\left(x\right)\right)
+   $$
+  	and if now we calculate the module of this derivative we get 
+   $$
+       \left\lvert\left(T^j\right)'\left(x\right)\right\rvert = \prod_{k=0}^{j-1}\left\lvert T'\left(T^k\left(x\right)\right)\right\rvert \gg 1
+   $$
+	where, since the map is expanding, each term of the product is larger then one.
 \end{proof}
 \begin{prop}
     If two points p and q are part of the same periodic orbit then they are both of the same type.

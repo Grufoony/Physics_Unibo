@@ -1,18 +1,23 @@
 % classification of chaotic systems
-Let $\pi^1$ be a one-dimensional thorus (a circle). Now we define the transformations $R_\alpha : \pi^1 \rightarrow \pi^1$, $R_\alpha(x) = x + \alpha (mod \ 1)$, which are called rotations by an "angle" $\alpha$. \\
-Now, if $\alpha = p/q$, with $gcd(p,q)=1$, then:
+Let $\pi^1$ be a one-dimensional thorus (a circle). We define the transformations 
+$$
+R_\alpha : \pi^1 \rightarrow \pi^1, \ R_\alpha(x) = (x + \alpha) \ mod \ 1
+$$
+which are called rotations by an ``angle" $\alpha$. \\
+Now, if $\alpha = p/q$, with $\gcd(p,q)=1$, then:
 \begin{itemize}
 	\item all orbits are periodic with fundamental period $q$. 
 	\item if $\alpha$ is not rational, then all orbits are dense. 
 \end{itemize}
 \begin{proof}
 	\begin{itemize}
-		\item We consider that $R^n_\alpha(x)=x$ is equivalent to $x + n\alpha (mod \ 1) = x$, so 
-		$$ x + np/q (mod \ 1) = x
+		\item We consider that $R^n_\alpha(x)=x$ is equivalent to $(x + n\alpha) \ mod \ 1 = x$, so 
+		$$ 
+			\left(x + n\frac{p}{q}\right) \ mod \ 1 = x
 		$$
 		which means that, 
 		$$
-			np/q = k \ \longrightarrow	\ n = \frac{kq}{p}
+			n\frac{p}{q} = k \ \longrightarrow	\ n = \frac{kq}{p}
 		$$
 		and for $n$ to be an integer, p needs to be simplified, but it can't be simplified with $q$, so it simplifies with $k$, which is then equal to $k = mp$. So in the end we get
 		$$
@@ -23,3 +28,100 @@ Now, if $\alpha = p/q$, with $gcd(p,q)=1$, then:
 		Now, call $j = n - m$, then we can say that $\{R^{k_j}_\alpha\}_k$ is $\varepsilon-dense$ in $\pi^1$, which means that the orbit is dense.
 	\end{itemize}
 \end{proof}
+A dynamical system $(M,\phi^t)$ is called topologically transitive (or just transitive) if exists $x\in M$ such that the future orbit
+$$
+	O^t(x) = \{\phi^t(x)\}
+$$
+is dense. \\
+A system is called minimal if all forward orbits $O^t(x)$ are dense. \\ 
+A subset $A \subseteq M$ is called invaraint if $\phi^{-t}(A) = A$ for every $t$. Note that if $\phi^t$ is invertible, this statement is equivalent to saying that $\phi^t(A) = A$ for every $t$. \\
+Finding invariant subsets is important because we know that if we have an initial condition in that region, the orbit is going to stay in there. Of course, this doesn't give us the trajectory, but it helps us by restricting the phase space. \\
+A function $f:M\rightarrow R$ (observable) is called invariant if $fo\phi^t = f$ for every $t \geq 0$. This is what is called in mechanics a prime integral of motion. \\
+Suppose $f = 1_a$, where $1_a(x) = 1$ if $x\in A$ and $1_a(x) = 0$ if $x \notin A$. Then we have that
+$$
+	1_a o \phi^t = 1_a
+$$
+but also 
+$$
+	1_a o \phi^t = 1_{\phi^{-t}(A)}
+$$
+So combining the two we get that 
+$$
+	\phi^{-t}(A) = A
+$$
+%prop
+If a dynamical system is topologically transitive, there exists no continuous invariant observable other than constant functions.
+%proof
+Say that $O^t(x_0)$ is dense. Take any $y \in M$, then exists an $x_j = \phi^{t_j}(x_0)$ such that $x_j \longrightarrow y$. \\
+Now, suppose that a function $f$ is continuous, then
+$$
+	f(x_j) \longrightarrow f(y)
+$$
+and suppose that $f$ is invariant, so that
+$$
+	f(x_j) = f(\phi^{t_j}(x_0)) = f(x_0) = C
+$$
+and $C$ converges to $f(y)$, but since $C$ is constant, it can only converge to $C$, so 
+$$
+	f(y) = C
+$$
+which is a constant function. \\ \\
+Now we try to generalize rotations of the circle to translations of a d-thorus. \\
+$$
+	T_\gamma : \pi^d \rightarrow \pi^d, \ T_\gamma (x) = (x_1 + \gamma_1, x_2 + \gamma_2, ...) \ mod \ 1 = (x + \gamma) \ mod \ 1
+$$
+% prop
+Given $T_\gamma$ as above, it is minimal if and only if (1,\gamma_1,\gamma_2,...) are rationally independent (which means that if a linear combination of them is equal to zero, they must me all zero). \\
+% obs
+In this case, topological transitivity (one dense orbit) is equivalent to minimality (all orbits are dense). This is because translations commute:
+$$
+	T_{x-x_0}(x_0) = x
+$$
+$$
+	T_{x-x_0} O^t(x_0) = T_{x-x_0}(T^k_\gamma(x_0)) = T^k(T_{x-x_0}(x_0)) = O(x)
+$$
+which means that the translated orbit is dense if and only if the initial one is dense, so translating a dense set we get another dense set. \\
+So we only need to show topological transitivity, instead of minimality. Let's show that topological transitivity implies rational independence: By contradiction, suppose that $1,\gamma_1,\gamma_2,...$ are not rationally independent, which means that exists a set $k_1,k_2,...$, where $k_i$ are not all zero, such that
+$$
+	\sum_i k_i\gamma_i = 0
+$$
+Define $f(x) = e^{2\pi i \lang k,x\rang}$, which is continuous and non constant, because not all $k_i$ are zero (so you have at least one $x_i$ in the exponent). Now we just need to show that $f$ is invatiant. To do this we calculate $f(T_\gamma(x))$:
+$$
+	f(T_\gamma(x)) = \exp(2\pi i \lang k, x + \gamma \rang) = \exp(2\pi i \sum_i k_ix_i)\exp(2\pi i \sum_i k_i \gamma_i) = \exp(2\pi i \sum_i k_ix_i) = f(x)
+$$
+and this holds for every $x$ in the thorus. \\ \\
+% poincarre sections
+Let's take a system on a ring, and the dynamics represents rotations on this ring. We can imagine this as a cave tube filled with fluid (marmellade). In this case, the motion of the fluid will be laminar. \\
+In discrete time, we take a surface with codimension 1, which is intersects the trajectory in a point $x$, and we want to find after how many iterations the trajectory intersects the surface again, so in other words, how long it's going to take for the trajectory to intersect the surface again. \\
+A Poincarre section of a continuous dynamical system is a codimension 1 submanifold such that all trajectories cross it transversally (more or less). \\
+In this case, the so called Poincarre map, also known as first return map, is defined as follows:
+$$
+	T_{M_0}: M_0 \rightarrow M_0, \ T_M(x) = \phi^{t_{M_0}(x)}(x) = \min \{t > 0 | \phi^t(x)\in M_0\}
+$$
+where $t_{M_0}$ is the return time to $M_0$. \\ \\
+% example of a dynamical system
+Continuous time dynamical system, the Kronecker flow.
+$$
+	\phi^t : \pi^d \rightarrow \pi^d
+$$
+given by the solutions of the ODE
+$$
+	\dot{x} = \omega
+$$
+In this case it's very easy to find the flux, which is simply
+$$
+	\phi^t(x) =  (x + \omega t) \ mod \ 1
+$$
+
+
+
+
+
+
+
+
+
+
+
+
+
