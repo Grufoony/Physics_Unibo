@@ -123,7 +123,9 @@ The Birkhoff theorem states that:
 				\int f d\mu = f
 			$$
 			which assures that $f$ is a constant.
-		\item (3) implies (4) because, if we apply (3) to $f=1_A$, 
+		\item (3) implies (4) because, if we apply (3) to $f=1_A \in L^1$, knowing that $T^{-1}A=A \mod\mu$ it's true that $1_{f^{-1}_A}=1_A$ $\mu$-a.e.
+			$1_{f^{-1}_A} = 1 \circ T$, so by (c) $1_A$ is constant $\mu$-a.e.
+			So if $1_A = 0$, $A=\emptyset\mod\mu$ then $\mu(A)=0$, or if $1_A=1$, $A=M\mod\mu$ then $\mu(A)=1$
 		\item (4) implies (1) because, if we claim that a function $f:M \rightarrow R$ is constant almost everywhere only if exists a constant $l$ such that $\mu(\{x\in M | f(x) \leq l\})\in (0,1)$, this set is increasing as we increase $l$. Now, if $l$ goes to $-\infty$ the measure goes to $0$, and if $l$ goes to $\infty$, the measure goes to $1$. The function can only jump in going from $0$ to $1$, but it can't do it all in one jump, so it must be constant except on the jumps.
 	\end{itemize}	
 \end{proof}
