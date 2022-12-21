@@ -64,7 +64,7 @@ We also define the concept of an invariant set.
 	$$
 	where 
 	$$
-		A \Delta B = (A\cup B) \ (A \cap B)
+		A \Delta B = (A\cup B) - (A \cap B)
 	$$
 \end{definition}
 We then define push-forward measures:
@@ -83,7 +83,7 @@ Now, if $\phi^t * \mu \rightarrow \nu$, then $\nu$ is called an equilibrium meas
 \section{Birkhoff's ergodic theorem}
 Given an observable $f:M\rightarrow M$ we define the Birkhoff (time) average as
 $$
-	f^*(x) \ \lim_{t\rightarrow \infty} \frac{1}{T}\int_0^T f\circ \phi^t(x)dt
+	f^*(x) = \lim_{t\rightarrow \infty} \frac{1}{T}\int_0^T f\circ \phi^t(x)dt
 $$
 The Birkhoff theorem states that:
 \begin{prop}
@@ -129,6 +129,126 @@ The Birkhoff theorem states that:
 		\item (4) implies (1) because, if we claim that a function $f:M \rightarrow R$ is constant almost everywhere only if exists a constant $l$ such that $\mu(\{x\in M | f(x) \leq l\})\in (0,1)$, this set is increasing as we increase $l$. Now, if $l$ goes to $-\infty$ the measure goes to $0$, and if $l$ goes to $\infty$, the measure goes to $1$. The function can only jump in going from $0$ to $1$, but it can't do it all in one jump, so it must be constant except on the jumps.
 	\end{itemize}	
 \end{proof}
+\begin{prop}
+	$R_\al$ is ergodic if and only if $\al$ is not rational.	
+\end{prop}
+\begin{proof}
+	Suppose that $\al$ was rational. Then, if $f(x) = \sin(2\pi q x)$ is invariant and not constant. If $\al$ was rational, we would have periodicity, thus the function would be constant. In fact for $R_\al(x) = \sin(2\pi q (x + p/q))$ we have
+	$$
+		R_\al(x) = \sin(2\pi q x + 2\pi p) = \sin(2\pi q x) = f(x)
+	$$
+	Now, suppose that $\al$ isn't rational. We want to prove that if $f\in L^1$ and for $f \circ R_\al = t$, then $f$ is constant. \\
+	We know that we can expand functions with Fourier transform. If $f = f \circ R_\al$, this implies that $\hat{f} = \hat{f}\exp(2\pi k \al)$ $\forall k \neq 0$ , where the second piece is different from $1$. Then
+	$$
+		\hat{f}(k)(1-\exp(2\pi k \al)) = 0 \rita \hat{f}(k) = 0 
+	$$
+	$$
+		f(x) = \hat{f}(0)\exp(2\pi i 0 x) = \hat{f}(0)
+	$$
+	which is constant.
+\end{proof}
+\begin{definition}
+	A measure preserving dynamical system $(M,\mu,T)$ is called mixing if for all measurable $A,B \subseteq M$
+	$$
+		\mu(T^{-n}A\cap B) \rita \mu(A)\mu(B)
+	$$
+	$$
+		\frac{\mu(T^{-n}A\cap B)}{\mu(B)} \rita \mu(A)
+	$$
+	as $n$ goes to infinity.
+\end{definition}
+This represents the portion of the counter-image of $A$ contained in $B$, renormalizedto $B$.
+\begin{prop}
+	If a system is ergodic, then give any $A\subseteq M$ with $\mu(A) > 0$, we have
+	$$
+		\frac{\# \{0 \ll k \ll n-1 | T^k(x)\in A\}}{n} \rita \mu(A)
+	$$
+	where this represents the frequency of visits in $A$.
+\end{prop}
+\begin{proof}
+	We apply ergodicity fo $f = 1_A$	
+	$$
+		1_A(x) = \lim_{n\rita\infty} \frac{1}{n}\sum_{k=0}^{n-1}1_A \circ T^k(x) = \int_M 1_A d\mu
+	$$
+	where the integral of the indicator function is simply the measure.
+\end{proof}
+\begin{prop}
+	Mixing implies ergodicity.
+\end{prop}
+\begin{proof}
+	Mixing means that $\mu(T^{-n}A \cap A) \rita \mu(A)^2$. Suppose that $A$ is invariant. Then
+	$$
+		T^{-n}A = A \ mod \ \mu
+	$$
+	So we substitute this formula in the first one
+	$$
+		\mu(A \cap A) = \mu(A)
+	$$
+	so at this point we have the equality 
+	$$
+		\mu(A) = \mu(A)^2
+	$$
+	and the only numbers equal to their squares are $0$ and $1$, so the measure is either $0$ or $1$.
+\end{proof}
+\begin{prop}
+	$(M,\mu,T)$ is mixing if and only if, $\forall f,g \in L^2(M,\mu)$
+	$$
+		\int (f\circ T^n)g d\mu \rita \int f d\mu \int g d\mu 
+	$$
+\end{prop}
+We note that
+$$
+	\int f d\mu = \int (f\circ T^n) d\mu
+$$
+because the measure is preserved.
+\begin{proof}
+	We take $f = 1_A$ and $g = 1_B$. So we get
+	$$
+		\int (1_A \circ T^n)1_B d\mu \rita \int 1_A d\mu \int 1_B d\mu
+	$$
+	where $1_A \circ T^{-n} = 1_{T^{-n}(A)}$ and $1_{T{-n}A\cap B}$.
+	So we get
+	$$
+		\mu(T^{-n}A\cap B) \rita \mu(A)\mu(B)
+	$$
+\end{proof}
+\begin{prop}
+	If I prove the previous proposition for $f,g\in S$, where $S$ is a dense subspace of $L^2$, then it works $\forall f,g \in L^2$.	
+\end{prop}
+Now we want to prove that the doubling map $T_2$ is mixing. We take $f = e_j$, where $e_j$ is the jth vector of the fourier basis, $e_j(x) = \exp(2\pi ij x)$, and we also take $g = \overline{e}_k$.
+$$
+	\int e_j d Leb = \int_0^1 \exp(2\pi i j x) dx = \left(\frac{\exp(2\pi i j x)}{2\pi i j}\right)_0^1 = 1-1 = 0
+$$
+if $j \neq 0$. If $j=0$ then 
+$$
+	\int e_j d Leb = \int_0^1 \exp(2\pi i j x) dx = \delta_{j0}
+$$
+Also
+$$
+	\int \overline{e}_ke_j d Leb = \int e_{k-j} dx = \delta_{jk}
+$$
+So we combine these to get
+$$
+	\int (f\circ T^n)g d Leb = \int (e_j \circ T^n)\overline{e}_k d Leb
+$$
+where 
+$$
+	e_j \circ T^n(x) = \exp(2\pi i j 2^n x) = \exp(2\pi i (2^n j) x) = e_{2^n j}(x)
+$$
+So finally
+$$
+	\int e_{2^n j}\overline{e}_k d Leb = \delta_{2^nj,k} \rita 0 = \int e_j d Leb \int \overline{e}_k d Leb
+$$
+So it works for $f = e_j$ and $g = \overline{e}_k$, and this means that it also works for finite linear combinations of basis vectors. \\ \\
+We can prove the same thing for the cat map. By the same argument, suffices to show that the previous relation holds for $f = e_k = e_{(k_1,k_2)}$ and $g = \overline{e}_j$. \\
+We observe that 
+$$
+	e_k \circ T_A^n(x) = \exp(2\pi i \lang k, T_A^n x \rang) = \exp(2\pi i \lang k, A x \rang) = \exp(2\pi i \lang (A^t)^n k, x \rang) = e_{A^nk}
+$$ 
+Now, if we do the integral it's equivalent to the integral
+$$
+	\int (e_k \circ T_A^n)\overline{e}_jd Leb = \int e_{A^n k} \overline{e}_j d Leb = \delta_{A^nk,j}
+$$
 
 
 
