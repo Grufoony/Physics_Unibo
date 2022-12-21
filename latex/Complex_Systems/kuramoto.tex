@@ -32,29 +32,32 @@ where $D$ is the degree matrix, which contains the degree vector on the diagonal
 Now we ask ourselves, for this kind of systems, where we have a certain number of oscillators, does exist a solution where all the oscillators are in phase, i.e. sincronized? \\
 This system is not hamiltonian, because we have dissipation, but it is linear. If we consider a generic linear system of the form:
 $$
-	\dot{z} = A z
+	\dot{\vec{x}} = A \vec{x}
 $$
-we know that the solution has an equilibrium limit, $\overline{z}$. We expect then that $\overline{z}$ has null eigenvalue
+we know that the solution has an equilibrium limit, $\vec{x}_*$. We expect then that $\vec{x}_*$ has null eigenvalue
 $$
-	A \overline{z} = 0
+	A \vec{x}_* = 0
 $$
 and we also expect all the eigenvalues of $A$ to be negative. \\
-If, in particular, we consider a system of the form:
+If, in more general terms, the system is described by an equation of the type:
 $$
-	\dot{x} = a(x)
+	\dot{\vec{x}} = a(\vec{x})
 $$
-we can introduce a function $H(x)$, where we require that
+where $\vec{x} = (x_k,p_k)$, is the position vector in the phase space, we can introduce a function $H(\vec{x})$, where we require that
 $$
-	\frac{d}{dt}H(x) = a(x)\frac{\partial H}{\partial x} < 0
+	\frac{d}{dt}H(\vec{x}) = \nabla H\cdot a(\vec{x}) < 0
 $$
 This functions are called Ljiapounov functions. With this functions we can describe the evolution of the system and its decrease towards equilibrium with just one function. So even if the system had many degrees of freedom, now it is a one-dimensional system. This suggests that finding this functions is of great interest. \\
 For example, in our system a good choice for the Ljiapounov function would be
 $$
-	H = \sum_k \frac{\omega}{2}(x^2_k + p^2_k)
+	H(x_k,p_k) = \sum_k \frac{\omega}{2}(x^2_k + p^2_k)
 $$
 If we don't consider the interaction part, then each term is simply the hamiltonian of a single oscillator and the function is the sum of all the hamiltonians, and this is guaranteed to be conserved. This means that the non conservation comes entirely from the dissipation term, so we have
 $$
-	\frac{dH}{dt} = -\sum_{k,j} \omega p_k L_{kj}p_j < 0
+	\frac{dH}{dt} = \sum_k \left( \omega^2 x_kp_k - \omega^2 x_kp_k - \sum_j \omega p_k L_{kj} p_j \right) 
+$$
+$$
+	\rita \ \frac{dH}{dt} = -\sum_{k,j} \omega p_k L_{kj}p_j < 0
 $$
 Now we take the laplacian matrix to be symmetric, and we then impose
 $$
@@ -86,7 +89,7 @@ $$
 
 
 % We apply the average field theory. We try to define a self consistent solution, so that each oscillator becomes representative of the whole system. \\
-% We introduce the order parameter
+% 	We introduce the order parameter
 % $$
 % 	re^{i\phi} = \frac{1}{N}\sum_j e^{i\theta_j}
 % $$
