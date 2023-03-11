@@ -1,0 +1,34 @@
+We need to define a mathematical model that generates sequences from an \emph{alphabet} $\mathcal{A}$, which can be any finite set.
+We will denote both set of finite and infinite sequences as $\mathcal{A}^{*} = \cup_{n \in \mathbb{N}} \mathcal{A}^n$ and $\mathcal{A}^\mathbb{N}$.
+Now we can define a sequence, or a \emph{word}, $\omega \in \mathcal{A}^n$ and denote with $\left\lvert \omega \right\rvert = n$ its length.
+In particular, we will use the notation $\omega_i^j = \left(\omega_i, \ldots, \omega_j\right)$.
+We can also take $\mathcal{A}^\mathbb{Z}$ as two-sided alphabet.
+
+We will denote the canonical cylinder on $\Omega$ as $\left[a_1^n\right] = \left\{y \in \Omega \ \vert \ y_1 = x_1, \ldots, y_n = x_n\right\}$.
+To figure out that this is actually a cylinder, let's pretend to take $\left(r, \phi, h\right)$ cylindrical coordinates, fixing the radius $r = r_0$ and the height $h = h_0$, letting the angle free.
+
+Our space has a topology, so we can take $\mu \approx$ m (metric) absolutely continuous w.r.t. the Lebesgue measure on $\Omega = \mathbb{R}^n$.
+So it exists $\varphi \in \mathbb{L}^1(m)$ such that $\mu(f) = \int dm f(m)\varphi(m)$.
+Consider now the function
+\begin{equation*}
+    g_\mathcal{A}\left(z, z'\right) =
+    \begin{cases}
+        1 \ \ z = z' \\
+        0 \ \ z \neq z'
+    \end{cases}
+    \ \ \forall z, z' \in \mathcal{A}
+\end{equation*}
+Taking $x, y \in \Omega$ infinite sequences it is possible to prove that
+\begin{equation*}
+    \widetilde{d}\left(x, y\right) = \sum_{n=1}^\infty 2^{-n} g_\mathcal{A}\left(x_n, y_n\right)
+\end{equation*}
+is a metric over $\Omega$.
+Taking $x^{(n)} \in \Omega$ sequence of infinite sequences, given $0 < \lambda = \frac{1}{\left\lvert A\right\rvert} < 1$, we have that $d(x, y) = \lambda^{n\left(x, y\right)} \ \ \forall x, y \in \Omega$ is also a metric over $\Omega$, with $n(x, y) = \min\left\{k \vert x_k \neq y_k\right\}$.
+Moreover, $d$ and $\widetilde{d}$ define the same topology.
+The open balls are, $\forall x \in \Omega, \ \ r > 0$
+\begin{equation*}
+    \mathcal{B}\left(x, r\right) =  \left\{y \in \Omega \ \vert \ d(x, y) \leq r\right\} = \left\{y \in \Omega \ \vert \ x_k = y_k \ \forall \ 1 \leq k \leq \frac{\ln r}{\ln \lambda}\right\}
+\end{equation*}
+\begin{definition}
+    $\mathcal{F}$ is a \textbf{Borel $\sigma$-algebra} if is a set of subsets of $\Omega$ such that $\Omega \in \mathcal{F}$
+\end{definition}
