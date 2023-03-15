@@ -1,7 +1,7 @@
 # Physics_UniBO
 Repository for materials related to the master's degree course in Physics of the Alma Mater Studiorum - University of Bologna.
 The repository is divided into two main paths:
-## ./latex
+## ./tex
 Contains .tex files of courses
 ## ./utils
 Contains some code/miscellaneous of courses
