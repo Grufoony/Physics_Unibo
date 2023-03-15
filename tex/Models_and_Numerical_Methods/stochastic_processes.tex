@@ -6,16 +6,16 @@
 \end{definition}
 We need also a consistency condition:
 \begin{equation*}
-    \mu_n\left(\omega_1^n\right) = \sum_{\omega_0 \in \mathcal{A}} \mu_{n+1}\left(\omega_0^n\right) = \sum_{\omega_{n+1} \in \mathcal{A}} \mu_{n+1}\left(\omega_1^{n+1}\right)
+    \mu_t\left(a_1^t\right) = \sum_{a_0 \in \mathcal{A}} \mu_{t+1}\left(a_0^t\right) = \sum_{a_{t+1} \in \mathcal{A}} \mu_{t+1}\left(a_1^{t+1}\right)
 \end{equation*}
 Equivalently, we can define a stochastic process through the conditional probability
 \begin{equation*}
-    \mu\left(\omega_n \vert \omega_1^{n-1}\right) = \frac{\mu_n\left(\omega_1^n\right)}{\mu_{n-1}\left(\omega_1^{n-1}\right)}
+    \mu\left(a_t \vert a_1^{t-1}\right) = \frac{\mu_t\left(a_1^t\right)}{\mu_{t-1}\left(a_1^{t-1}\right)}
 \end{equation*}
 \begin{definition}
     A stochastic process is \textbf{stationary} if
     \begin{equation*}
-        \mu\left(a_1^k\right) = \mu\left(a_{n+1}^{n+k}\right) \ \ \forall a_1^\infty \in \mathcal{A}^\mathbb{N}
+        \mu\left(a_1^k\right) = \mu\left(a_{t+1}^{t+k}\right) \ \ \forall a_1^\infty \in \mathcal{A}^\mathbb{N}
     \end{equation*}
 \end{definition}
 \begin{definition}
@@ -30,3 +30,7 @@ Equivalently, we can define a stochastic process through the conditional probabi
         \mu\left(\left[a_1^k\right]\right) = \mu_k\left(a_1^k\right)
     \end{equation*}
 \end{theorem}
+
+\subsection{Markov's Models}
+
+\subsection{Hidden Markov's Models}
