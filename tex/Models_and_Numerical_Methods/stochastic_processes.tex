@@ -12,6 +12,11 @@ Equivalently, we can define a stochastic process through the conditional probabi
 \begin{equation*}
     \mu\left(a_t \vert a_1^{t-1}\right) = \frac{\mu_t\left(a_1^t\right)}{\mu_{t-1}\left(a_1^{t-1}\right)}
 \end{equation*}
+The $\mu_k$ are called \textbf{marginals} and, in order to be a probability, they must satisfy the normalization condition
+\begin{equation*}
+    \sum_{a_1^k \in \mathcal{A}} \mu_k\left(a_1^k\right) = 1
+\end{equation*}
+We notice that this sum is exponentially growing in $k$, so it's impossible to approximate the measure.
 \begin{definition}
     A stochastic process is \textbf{stationary} if
     \begin{equation*}
@@ -24,6 +29,16 @@ Equivalently, we can define a stochastic process through the conditional probabi
 \begin{definition}
     A process or a source is a \textbf{shift-invariant Borel probability measure} $\mu$ on the topological space $\mathcal{A}^\mathbb{Z}$ of doubly-infinite sequences $x = \left\{x_n\right\}_{n \in \mathbb{Z}}$, drawn from a finite (i.e. countable) alphabet $\mathcal{A}$
 \end{definition}
+Furthermore, it is trivial that we can write any standard cylinder as
+\begin{equation*}
+    \left[x_1^t\right] = \sqcup_{a \in \mathcal{A}} \left[x_1, \ldots, x_t, a\right]
+\end{equation*}
+It's easy to check that
+\begin{equation*}
+    \mu \in \mathcal{P}_I{\Omega} \ \vert \ \mu \circ \sigma^{-1} = \mu \Leftrightarrow \sum_{a \in \mathcal{A}} \mu_{t+1}\left(a, x_1, \ldots, x_t\right) = \mu_t\left(x_1^t\right)
+\end{equation*}
+Neural networks are heuristically approximating $\mu$.
+
 \begin{theorem}[Kolmogorov representation theorem]
     If $\left\{\mu_n\right\}$ is a sequence of measure defining a process then there is a unique Borel probability measure $\mu$ on $\mathcal{A}^\infty$ such that, $\forall k \geq 1$ and $\forall \left[a_1^k\right]$ cylinder
     \begin{equation*}
