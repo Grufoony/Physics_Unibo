@@ -37,3 +37,27 @@ The open balls are, $\forall x \in \Omega, \ \ r > 0$
     $\mathcal{F}$ is a \textbf{Borel $\sigma$-algebra} if is a set of subsets of $\Omega$ such that $\Omega \in \mathcal{F}$
 \end{definition}
 So a $\sigma$-algebra is actually a collection of all measurable sets.
+\begin{definition}
+    The \textbf{space of probability measures} is $\mathcal{P}\left(\Omega\right) = \left\{\mu \ \vert \ \mu\left(\Omega\right) = 1\right\}$
+\end{definition}
+Taking now a map $T : \Omega \to \Omega$ with a probability measure $\mu$, $\mu$ is called \textbf{T-invariant} if $\forall A \in \mathcal{F}, \mu\left(T^{-1}\left(A\right)\right) = \mu\left(A\right)$.
+In other words, the push-forward measure as to satisfy $T * \mu \equiv \mu \cdot T^{-1} = \mu$.
+We will denote the space of invariant probability measures with $\mathcal{P}_\mathcal{F} \subset \mathcal{P}$.
+
+The \textbf{shift} map $\sigma : \Omega \to \Omega$ such that $\sigma\left(x_0, x_1, \ldots, x_n, \ldots\right) = \sigma\left(x_1, \ldots, x_n, \ldots\right)$ represents an important map over our space.
+Notice that the shift map could represent our time, helping us to code a dynamical system (more details in the next sections).
+Moreover, one can verify that if $\mu$ is i.i.d. then it's shift-invariant, i.e. $\mu\left(\sigma^{-1}\left(\left[x_1^n\right]\right)\right) = \mu\left(\left[x_1^n\right]\right)$ and $\mu\left(\left[x_{n+k}^{m+k}\right]\right) = \mu\left(\left[x_n^m\right]\right)$.
+
+\begin{theorem}[Borel-Cantelli lemma]
+    \begin{equation*}
+        \left\{E_n\right\} \ \vert \ \sum_{n=1}^\infty \mu\left(E_n\right) < \infty \ \implies \mu\left(\lim \sup E_n\right) = 0
+    \end{equation*}
+\end{theorem}
+This lemma states that, beside null-measure sets, typically an $x \in \Omega$ only belongs to finitely many $E_k$'s. \\
+In order to clarify, let's take $E_m \subset \Omega$ such that $x \in \lim \sup E_n \Leftrightarrow x \in \cup_{m=n}^\infty E_m \ \forall n$, then it exists $n_j \to \infty$ sequence such that $x \in E_{n_j} \ \forall j$.
+Consequently, $E_n$ are becoming rare as $n$ increases.
+
+\begin{definition}
+    Let's consider a sequence of events $\left\{E_1, \ldots, E_n\right\}$.
+    These are \textbf{independent} if $\mu\left(E_1 \cap \ldots \cap E_n\right) = \mu\left(E_1\right) \ldots \mu\left(E_n\right)$
+\end{definition}
