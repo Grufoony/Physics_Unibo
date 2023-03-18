@@ -47,22 +47,27 @@ Neural networks are heuristically approximating $\mu$.
 \end{theorem}
 
 \subsection{Markov's Models}
-Markov's model is a stochastic model used to model pseudo-randomly changing systems. In a Markov's process the \emph{n} element probability depends only on previous \emph{k}-elements
+Markov's model is a stochastic model used to model pseudo-randomly changing systems.
+In a Markov's process the $n$ element probability depends only on previous $k$-elements
 \begin{equation}
 \mu\left(x_{n}\ \vert\ x_{0}, x_{1}, \dots, x_{n-1}\right):=\mu\left(x_{n}\ \vert\ x_{k}, x_{k+1}, \dots, x_{n-1}\right)
 \end{equation}
 
-A Markov's chain is a Markov's process where the \emph{n} element depends only on the current state (\emph{n-1} element). For this reason a Markov's chain is a no memory process.
+A Markov's chain is a Markov's process where the $n$ element depends only on the current state ($n-1$ element).
+For this reason a Markov's chain is a no memory process.
 \begin{equation}
 \mu\left(x_{n}\ \vert\ x_{0}, x_{1}, \dots, x_{n-1}\right):=\mu\left(x_{n}\ \vert\ x_{n-1}\right)
 \end{equation}
 
-We can define a \emph{Markov's measure}. Let's call $\mathbf{p}=\left(p_{1},\ p_{2},\dots ,\ p_{l}\right)$ the probability vector that a character of the alphabet \mathcal{A} is extracted and $P=\left[p_{ij}\right]$ the $l\times l$ matrix that describe the probability than the \emph{j} character is extracted when the privious one is the \emph{i}. We know that \mathbf{p} is normalized and $P$ is a stochastic matrix
+We can define a \emph{Markov's measure}.
+Let's call $\mathbf{p}=\left(p_{1},\ p_{2},\dots ,\ p_{l}\right)$ the probability vector that a character of the alphabet $\mathcal{A}$ is extracted and $P=\left[p_{ij}\right]$ the $l\times l$ matrix that describe the probability than the $j$ character is extracted when the privious one is the $i$.
+We know that $\mathbf{p}$ is normalized and $P$ is a stochastic matrix
 \[p_{j}\geq 0\quad \sum_{j=1}^{l}p_{j}=1\qquad\sum_{h=1}^{j}p_{ij}=1\ \forall i\]
-Since $P$ is stochastic it has the uniti vector as eighenvector with $1$ as eighenvalue. So for the \emph{Person-Frobenius theorem} all the eighenvalues are contained inside the complex circle with radius $1$.
-We say that \mathbf{p} is \emph{invariant} if it's a P's eighenvector. We can define for all $n$ the \emph{Markov's measure}
+Since $P$ is stochastic it has the uniti vector as eighenvector with $1$ as eighenvalue.
+So for the \emph{Person-Frobenius theorem} all the eighenvalues are contained inside the complex circle with radius $1$.
+We say that $\mathbf{p}$ is \emph{invariant} if it's a P's eighenvector. We can define for all $n$ the \emph{Markov's measure}
 \begin{equation}
-\mu_{•}\left(
+\mu_{n}\left(x_{1},\ \dots\ ,\ x_{n}\right)=p_{x_{1}}P_{x_{1}x_{2}}P_{x_{2}x_{3}}P_{x_{n-1}x_{n}}
 \end{equation}
 
 
