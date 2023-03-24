@@ -1,0 +1,4 @@
+memoryless
+Pearson-Frobenius
+ergodic
+Borel
