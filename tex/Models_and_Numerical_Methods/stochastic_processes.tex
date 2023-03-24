@@ -53,13 +53,13 @@ In a Markov's process the $n$ element probability depends only on previous $k$-e
 \mu\left(x_{n}\ \vert\ x_{0}, x_{1}, \dots, x_{n-1}\right):=\mu\left(x_{n}\ \vert\ x_{k}, x_{k+1}, \dots, x_{n-1}\right)
 \end{equation*}
 
-A Markov's chain is a Markov's process where the $n$ element depends only on the current state ($n-1$ element).
-For this reason a Markov's chain is a no memory process.
+A \textbf{Markov's chain} is a Markov's process where the $n$ element depends only on the current state ($n-1$ element).
+For this reason a Markov's chain is a memoryless process (present time process).
 \begin{equation*}
 \mu\left(x_{n}\ \vert\ x_{0}, x_{1}, \dots, x_{n-1}\right):=\mu\left(x_{n}\ \vert\ x_{n-1}\right)
 \end{equation*}
 
-We can define a \emph{Markov's measure}.
+We can define a \textbf{Markov's measure}.
 Let's call $\mathbf{p}=\left(p_{1},\ p_{2},\dots ,\ p_{l}\right)$ the probability vector that gives us the probability that a character is extracted from the alphabet $\mathcal{A}$ and $P=\left[p_{ij}\right]$ the $l\times l$ matrix that describe the probability than the $j$ character is extracted when the previous one is the $i$.
 We know that $\mathbf{p}$ is normalized and $P$ is a stochastic matrix
 \[p_{j}\geq 0\quad \sum_{j=1}^{l}p_{j}=1\qquad\sum_{h=1}^{j}p_{ij}=1\ \forall i\]
@@ -72,3 +72,16 @@ We say that $\mathbf{p}$ is \emph{invariant} if it's a P's eigenvector. We can d
 
 
 \subsection{Hidden Markov's Models}
+Having an HMM (hidden Markov's model) implies having some hidden states, which we know that exist and some observable which we can actually measure.
+Depending on the data we got we can have three different types of problems:
+\begin{itemize}
+    \item \emph{likelihood}, i.e. determine the likelihood function $\mathcal{L}\left(\mathbf{x} \vert \mathbf{\theta}\right)$
+    \item \emph{decoding}, i.e. discover the best hidden sequence $Q$ given $\mathbf{x}$ and $\mathbf{\theta}$
+    \item \emph{learning}, i.e. given $\mathbf{x}$ and the hidden states $Q$ try to infer $\mathbf{\theta}$
+\end{itemize}
+Let's consider $\mathcal{A} = \left\{o_1, \ldots, o_n\right\}$ our set of observable and $\mathcal{B} = \left\{q_1, \ldots, q_l\right\}$ our hidden states, with $\mathbf{p} = \left(p_x\right)_{x \in \mathcal{B}}$ and $P = \left[P_{x,y}\right]_{x,y \in \mathcal{B} \times \mathcal{B}}$.
+Let's assume it exists the stochastic matrix (on the rows) $R = \left[R_{y,x}\right]_{y \in \mathcal{B}, x \in \mathcal{A}}$ such that $\forall y \in \mathcal{B} \ \sum_{x \in \mathcal{A}} R_{y,x} = 1$.
+Then, our measure is
+\begin{equation*}
+    \mu_t\left(x1, \ldots, x_t\right) = \sum_{\left(y_1, \ldots, y_t\right) \in \mathcal{B}} \mathbf{p}_{y_1}R_{y_1, x_1}P_{y_1,y_2} \ldots P_{y_t-1,y_t}R_{y_t, x_t}
+\end{equation*}
