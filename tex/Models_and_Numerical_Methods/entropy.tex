@@ -1,0 +1,18 @@
+The first definition of entropy (of a random variable) was given by Shannon:
+\begin{definition}
+    Let $X$ be a random variable which takes values in $\mathcal{A} = \left\{a_1 ,\ldots, a_k\right\}$ with probabilities $\mu_j = \mathbb{P}\left(X = a_j\right)$ then its \textbf{entropy} its
+    \begin{equation*}
+        H\left(X\right) = \sum_{j = 1}^k \mu_j \log \mu_j
+    \end{equation*} 
+\end{definition}
+\begin{definition}
+    The \textbf{n-block entropy} is defined as 
+    \begin{equation*}
+        H_n\left(\mu\right) = - \sum_{\left\lvert \omega\right\rvert = n } \mu(\omega) \log \mu(\omega)
+    \end{equation*}
+\end{definition}
+We can see the n-block entropy as the entropy of a word of length $n$, i.e. $H\left(X_1^n\right)$.
+The first question we can arise is: how much information do I gain adding one character to the sequence?
+\begin{definition}
+    The \textbf{entropy rate} is defined as $h_n\left(\mu\right) = H_{n+1}\left(\mu\right) - H_n\left(\mu\right)$
+\end{definition}
