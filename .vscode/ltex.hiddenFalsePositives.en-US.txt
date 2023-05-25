@@ -1,0 +1,5 @@
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is the input'value of the \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-th input, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q the weight of that input and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q the offset value.\\E$"}
+{"rule":"THE_SUPERLATIVE","sentence":"^\\QWe've five phases:\nInitial population, sets of variables (chromosomes)\nFitness function, where we assume to have a maximum, which means that a best solution exists\nSelection\nCrossover\nMutation\\E$"}
+{"rule":"THE_SUPERLATIVE","sentence":"^\\QWe've five phases:\nInitial population, sets of variables (chromosomes)\nFitness function, where we assume to have a maximum, which means that a best solution exists\nSelection, in which we select, in some way, the fittest individuals\nCrossover\nMutation\\E$"}
+{"rule":"A_INFINITIVE","sentence":"^\\QThis is simply done by using the enumerate() function and letting python solve this problem.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QIn this case it's simple because it's a binary one (BC-ELoss() of PyTorch)\\E$"}

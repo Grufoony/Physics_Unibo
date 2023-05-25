@@ -1,0 +1,537 @@
+\chapter{Ergodic Theorem, AEP Theorem and Entropy Theorem}
+In this chapter we want to discuss the most important theorems of Information Theory: the \textit{Ergodic theorem}, the \textit{Asymptotic Equipartition Property (AEP) theorem} and the \textit{Shannon-McMillan-Breiman theorem} or \textit{Entropy theorem}.
+\\First we will need to recall some concepts in probability convergence and state some fundamental results.
+
+\section{Some fundamental results}
+We say that a sequence of random variables $x_1, x_2, \dots, $ converges to a random variable $x$:
+\begin{itemize}
+    \item[a)] \textbf{in probability} if $\mathbb{P}(|x_n - x| > 0) \rightarrow 0$ when $n \rightarrow \infty$ and for all $\epsilon >0$
+    \item[b)] \textbf{in mean square} if $\mathbb{E}( (x_n - x)^2 ) \rightarrow 0$ when $n \rightarrow \infty$
+    \item[c)] \textbf{almost surely} (also called \textbf{with probability $\bm{1}$}) if 
+    \begin{equation}
+        \mathbb{P} \big( \lim_{n \rightarrow \infty} x_n = x \big) = 1
+    \end{equation}
+\end{itemize}
+Of course $c) \Rightarrow b) \Rightarrow a)$. \\
+If $\{P_n\}$ is a sequence of measurable properties (for example: $\frac{\sum_i^n x_i}{n} - \Bar{x}$ smaller or bigger than $\epsilon$) then
+\begin{itemize}
+    \item[1)] $P_n(x)$ holds \textbf{eventually almost surely}, if for almost every $x$ there is an $N=N(x)$ such that $P_n(x)$ is true for every $n \geq N$
+    \item[2)] $P_n(x)$ holds \textbf{infinitely often}, almost surely, if for almost every $x$ there is an increasing sequence $\{n_j \}$ of integers (which may depend on $x$) such that $P_{n_j}(x)$ is true for $j = 1,2, \dots$
+\end{itemize}
+Here, $1) \Rightarrow 2)$. We also have three equivalent formulations of almost sure convergence:
+\begin{lemma}
+    The following are equivalent for measurable functions on a probability space:
+    \begin{itemize}
+        \item[1:] $f_n \rightarrow f$, almost surely;
+        \item[2:] $|f_n(x) - f(x)| < \epsilon$, eventually almost surely, for every $\epsilon>0$;
+        \item[3:] Given $\epsilon>0$, there is an $N$ and a set $G$ of measure at least $1 - \epsilon$ such that $|f_n(x) - f(x)| < \epsilon$, $x \in G$, $n \geq N$.
+    \end{itemize}
+\end{lemma}
+\begin{lemma}[The Markov inequality]
+\label{lemma:markov_ineq}
+    Let $f$ be a nonnegative, integrable function on a probability space $(X, \Sigma, \mu)$. 
+    \\If 
+    \begin{equation*}
+        \int f \, d \mu \leq \epsilon \delta
+    \end{equation*}
+    then 
+    \begin{equation*}
+        f(x) \leq \epsilon
+    \end{equation*}
+    except for a set of measure at most $\delta$. 
+\end{lemma}
+Next, we state a very deep and important result, the Borel-Cantelli principle \cite{Borel_cantelli}: such Lemma states that, under certain conditions, an event will have probability of either zero or one. Accordingly, it is the best-known of a class of similar theorems, known as zero-one laws.
+\begin{lemma}[The Borel-Cantelli principle]
+\label{lemma:borel_cantelly}
+    If $\{E_n \}$ is s a sequence of measurable sets (so, a series of events) in a probability space $(X, \Sigma, \mu)$ such that
+    \begin{equation*}
+        \sum_n^{\infty} \mu(E_n) < \infty
+    \end{equation*}
+    then 
+    \begin{equation*}
+        x \notin E_n 
+    \end{equation*}
+    eventually almost surely, or equivalently 
+    \begin{equation*}
+        \mu \big( \limsup_{n \rightarrow \infty} E_n    \big) = 0
+    \end{equation*}
+\end{lemma}
+Here, ``lim sup" denotes limit supremum of the sequence of events, and each event is a set of outcomes. That is, $\limsup E_n$ is the set of outcomes that occur infinitely many times within the infinite sequence of events $\{ E_n \}$. Explicitly,
+\begin{equation*}
+    \limsup_{n \rightarrow \infty} E_n = \cap_{n=1}^\infty \cup_{k=n}^\infty E_k
+\end{equation*}
+The set $\limsup E_n$ is sometimes denoted $\{E_n \, \text{i.o.} \}$, where ``i.o." stands for ``infinitely often". The theorem therefore asserts that if the sum of the probabilities of the events $E_n$ is finite, then the set of all outcomes that are ``repeated" infinitely many times must occur with probability zero. Note that no assumption of independence is required.
+\\This basically means that such $E_n$ are becoming smaller and smaller with increasing $n$: thus if for example the sets $E_n$ are ``bad'' sets in which we do not want our variable $x$ to be, we just need to prove that $\sum_n \mu(E_n) < \infty$ to ``neglect them'' in the long run. 
+\\A related result, sometimes called the \textbf{second Borel–Cantelli lemma}, is a partial converse of the first Borel–Cantelli lemma. The lemma states: If the events $E_n$ are (pairwise) independent and the sum of the probabilities of the $E_n$ diverges to infinity, then the probability that infinitely many of them occur is $1$. That is:
+\begin{lemma}[second Borel–Cantelli lemma]
+    if $\sum_{n=1}^\infty \mu(E_n) = \infty$ and the events $\{ E_n \}_{n=1}^\infty$ are \textbf{pairwise independent}, then 
+    \begin{equation*}
+        \mu \big( \limsup_{n \rightarrow \infty} E_n \big) = 1
+    \end{equation*}
+\end{lemma}
+The infinite monkey theorem, that monkeys endless typing at random will, with probability $1$, eventually produce every finite text (such as the works of Shakespeare) \footnote{However, the probability that monkeys filling the entire observable universe would type a single complete work, such as Shakespeare's Hamlet, is so tiny that the chance of it occurring during a period of time hundreds of thousands of orders of magnitude longer than the age of the universe is extremely low (but technically not zero). To put it another way, for a one in a trillion chance of success of the monkeys typing Hamlet, there would need to be $10^{360641}$ observable universes where \textit{each proton} was a monkey typing.}, amounts to the statement that a (not necessarily fair) coin tossed infinitely often will eventually come up Heads. This is a special case of the second Lemma.
+\\To end this section, we state an important result connecting cardinality and probability:
+\begin{lemma}[cardinality bounds]
+    Let $\mu$ be a probability measure on the finite set $A$, let $B \subset A$, and let $\alpha$ be a positive number.
+    \begin{itemize}
+        \item[1)] if $a \in B \Rightarrow \mu(a) \geq \alpha$, then $|B| \leq 1/\alpha$.
+        \item[2)] For $b \in B$, $\mu(b) \geq \alpha/|B|$, except for a subset of $B$ of measure at most $\alpha$
+    \end{itemize}
+\end{lemma}
+Basically, we are saying that given a set in a measurable space, this is \textbf{either big in probability or in cardinality}. We cannot have both. 
+
+\section{AEP property and SMB Theorem}
+In information theory, the analog of the law of large numbers is the asymptotic equipartition property (AEP). It is a direct consequence of the weak law of large numbers.
+\begin{theorem}[AEP Theorem]
+    \hfill \\
+    If $x_1, x_2, x_3, \dots$ are i.i.d. which follow a distribution $p(x)$, then 
+    \begin{equation}
+        -\frac{1}{n} \log p(x_1, x_2, \dots, x_n) \xrightarrow{\text{in probability}}  H(x)
+    \end{equation}
+\end{theorem}
+\begin{proof}
+\hfill
+\\
+    Functions of independent random variables are also independent random variables. Thus, since the $x_i$ are i.i.d., so are $\log p(x_i)$. Hence, by the weak law of large numbers, 
+    \begin{equation*}
+        -\frac{1}{n} \log p(x_1, x_2, \dots, x_n) = -\frac{1}{n} \sum_i \log p(x_i) \xrightarrow{\text{in probability}} - \mathbb{E}[\log p(x)] = H(x)
+    \end{equation*}
+    which proves the theorem.
+\end{proof}
+We can also give an alternative (and equivalent) formulation of the AEP Theorem, stated under the assumptions of considering a  discrete-time stationary ergodic process $\mu$: the asymptotic equipartition property for such stochastic source is known as the Shannon–McMillan–Breiman theorem (SMB).
+\begin{theorem}[SMB Theorem]
+\label{th:SMB}
+    \hfill \\
+    Consider a stationary, ergodic, stochastic source $\mu$ with entropy $h = h_\mu > 0$. For simplicity, here we also assume that we are dealing with an i.i.d. process (but the more general case is also true).
+    \\Then for every $\epsilon>0$ and all sufficiently large $n$, one can find a subset $\mathcal{T}_n \subset \alp^n$ of \textbf{typical sequences} that is \textbf{small} in cardinality, but \textbf{large} in probability, so that:
+    \begin{itemize}
+        \item[(1)] $e^{n (h- \epsilon)} \leq |\mathcal{T}_n| \leq e^{n (h+ \epsilon)}$
+        \item[(2)] $\lim_{n \rightarrow \infty} \mu(\mathcal{T}_n) = 1$
+        \item[(3)] For each $\omega \in \mathcal{T}_n$ we have
+        \begin{equation*}
+            e^{n (h- \epsilon)} \leq \mu(\omega) \leq e^{n (h+ \epsilon)}
+        \end{equation*}
+    \end{itemize}
+\end{theorem}
+Let's take a closer look at what this theorem is telling us.
+\\If we consider $|\alp|=m$, then $|\alp^n| = m^n = e^{n \log m}$. Also, we know from the basic properties of entropy that $0 \leq h \leq \log n$. If we then look at the ratio $\frac{|\mathcal{T}_n|}{|\alp^n|} \sim e^{-n (\log m - h)} \xrightarrow[n \rightarrow \infty]{} 0$. This is what we mean by ``small'' in cardinality: not in a general sense, but small with regard to the dimension of our alphabet. 
+\\Also, we are saying that $\mu(\mathcal{T}_n) \rightarrow 1$ as $n \rightarrow \infty$: i.e., the ``density'' of $\mathcal{T}_n$ in $\alp^n$ is becoming bigger and bigger as we increase $n$. In the limit of $n$ going to infinity, the measure of our typical set becomes $1$: hence, in such limit \textbf{all sequences are typical}. 
+\\All of this is just to say that under suitable conditions, we will always have in our alphabet a few sequences with are typical with respect to all of those which can be formed: think as always about words in a language versus all the combinations of letters that can be formed. 
+\\Also, the last statement is telling us that $\mu(\omega) \sim e^{-n h}$, which is up to an $\epsilon$ equivalent to saying that $\lim_{n \rightarrow \infty} \frac{1}{n} \log \mu(\omega_n) = h$ as in the first formulation.
+\begin{proof}
+    \hfill \\ 
+    Given $\epsilon>0$, we let $\delta=\delta(\epsilon)$ to be chosen later.
+    \\We select  finite sequences with good empirical distribution:
+    \begin{equation*}
+        \mathcal{T}_n \equiv \{ \omega \in \alp^n : \big| \frac{f_\omega(a_k)}{n} - \mu_k \big| \leq \delta, \, k=1,2,\dots, d \}
+    \end{equation*}
+    The second statement follows immediately from the Law of Large Numbers: $\lim_{n \rightarrow \infty} \mu(\mathcal{T}_n) = 1$.
+    \\In the i.i.d. case we are discussing here:
+    \begin{align*}
+        \mu(\omega) = & \prod_{j=1}^n \mu(\omega_j) = \prod_{k=1}^d \mu_k^{f_\omega(a_k)} =  \\
+        = & \exp \big( \sum_{k=1}^d f_\omega(a_k) \ln \mu_k \big) = \exp \big( n \sum_{k=1}^d \frac{f_\omega(a_k)}{n} \ln \mu_k \big) = & \\
+        = & \exp \big( n \sum_{k=1}^d \mu_k \ln \mu_k \big) \cdot \exp \big( n \sum_{k=1}^d (\frac{f_\omega(a_k)}{n} - \mu_k) \ln \mu_k \big) = & \\
+        = & \exp \bigg( n (-h + \sum_{k=1}^d (\frac{f_\omega(a_k)}{n} - \mu_k) \ln \mu_k) \bigg)
+    \end{align*}
+    Now we choose $\delta$ sufficiently small such that $\big|  \sum_{k=1}^d (\frac{f_\omega(a_k)}{n} - \mu_k) \ln \mu_k) \big| \leq \epsilon$, for $\omega \in \alp^n$, and this gives the first statement of the Theorem.
+    \\Furthermore, 
+    \begin{equation*}
+        1 \geq \mu(\mathcal{T}_n) = \sum_{\omega \in \alp^n} \mu(\omega) \geq e^{-n (h + \epsilon)} |\mathcal{T}_n|
+    \end{equation*}
+    i.e., $|\mathcal{T}_n| \leq e^{n(h+ \epsilon)}$.
+    \\On the other hand, for sufficiently large $n$ we will have that
+    \begin{equation*}
+        \frac{1}{2} \leq \mu(\mathcal{T}_n) \leq e^{-n(h - \frac{\epsilon}{2})} |\mathcal{T}_n| \, ,
+    \end{equation*}
+    i.e., for sufficiently large $n$
+    \begin{equation*}
+        |\mathcal{T}_n| \geq \frac{1}{2} e^{n(h - \frac{\epsilon}{2})} \geq e^{n(h - \epsilon)} 
+    \end{equation*}
+    and this gives the first statement.
+\end{proof}
+We now want to prove a a result much stronger than the SMB theorem: the \textbf{Entropy Theorem}
+
+\section{Entropy Theorem and Ergodic Theorem}
+
+\begin{theorem}[Entropy Theorem]
+\label{th:entropy_theorem}
+\hfill \\
+    Given a stochastic,stationary, ergodic process $\mu$ on $\alp$,
+    \begin{equation}
+        \lim_{n \rightarrow \infty} -\frac{1}{n} \log \mu(x_1^n) = h_\mu \qquad \text{\textbf{almost surely}}
+    \end{equation}
+\end{theorem}
+We want to prove this by introducing and using a beautiful technique
+developed by Ornstein and Weiss while they were trying to extend entropy theorem
+from stochastic processes to random fields. In order to introduce the first fundamental lemmas concerning packings and covering, It is useful to start by proving the Ergodic Theorem.
+\\Recalling that a process $\mu$ is ergodic if any shift-invariant subset is either of measure $1$ or $0$, we state and prove the ergodic theorem in its essential form assuming (without loss of generality) a binary process $\alp= \{0,1 \}$
+\begin{theorem}[Ergodic Theorem]
+\hfill \\
+    If $\mu$ is a (binary) stationary, ergodic process
+    \begin{equation*}
+        \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{j=1}^n x_j \quad \text{exists \textbf{almost surely} on } \alp^{\nb}
+    \end{equation*}
+\end{theorem}
+In this case, letting $p = \mathbb{E}(x_1) = \mu(x_1=1)$, the theorem asserts that 
+\begin{equation*}
+    \lim_{n \rightarrow \infty} \frac{1}{n} (x_1 + x_2 +\dots+ x_n) = p \qquad \text{almost surely}
+\end{equation*}
+\begin{proof}
+    We start by assuming that the Theorem is false: the superior (inferior) limit of the averages is then larger (smaller) than $p$ by a fixed amount on a set of positive measure.
+    \\By assumption there exists $\epsilon>0$ such that if 
+    \begin{equation*}
+        A_\epsilon \equiv \big\{ x \in \alp^n : \limsup_{n \rightarrow \infty} \frac{x_1 + x_2 +\dots+ x_n}{n} > p + \epsilon \big\}
+    \end{equation*}
+    then $\mu(A_\epsilon) > 0$.
+    \\It is then easy to see (\textit{exercise - and an important one}) that $A_\epsilon$ is \textit{invariant}, hence of measure one: 
+    \begin{equation*}
+        \mu(A_\epsilon) = 1
+    \end{equation*}
+    This means that for almost all sequences $x$, there exists an infinite partition ($x$-dependent) in disjoint intervals over which the average exceeds $p+\epsilon$.
+    \\i.e. given $x= x_1, x_2, \dots $ and $n \in \nb^+$, we denote by $m=m(n) > n$ the first time
+    for which the average over the interval $[n, m]$ exceeds the expected value $p$ by $\epsilon$. 
+    \\$m$ is also $x$ dependent, and it is also finite for all $n$ and for a set of full measure of $x$'s in $\alp^{\nb}$.
+    \\It follows that for almost all $x$, we can find a disjoint partition ($x$ dependent):
+    \begin{equation*}
+        \nb = \cup_{k=1}^\infty [n_k, m_k], \quad \text{with} \, \, m_0 = 0, \, n_k = m_{k-1}+1
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \frac{1}{m_k - n_k + 1} \sum_{j=n_k}^{m_k} x_j > p + \epsilon \, .
+    \end{equation*}
+    The important step is now to obtain a control over finite sequences, proving that for sufficiently large $N$ there exists a set $\mathcal{G}_N$, large in probability, on which the average beats $p+\epsilon$.
+    Let's formally state this last passage: 
+    \begin{lemma}
+    \label{lemma:ergodic_th}
+        Given $\delta>0$ there exists a positive integer $N$ and a set $\mathcal{G}_N \subset \alp^N$ such that
+        \begin{itemize}
+            \item[1)] $\mu(\mathcal{G}_N)> 1 - \delta$
+            \item[2)] For each $\omega_1^n = (\omega_1, \dots, \omega_n) \in \alp^N$ there are disjoint intervals $[n_i, m_i] \subset [1,N]$ such that 
+            \begin{itemize}
+                \item[a)] $\{ [n_i,m_i] \}$ is a $\delta-$cover of $[1,N]$, i.e. $\sum_i (m_i - n_i +1) > (1 - \delta)N$
+                \item[b)] On each element of the coverings, the average exceeds $p$:
+                \begin{equation*}
+                    \frac{1}{|\omega_{n_i}^{m_i}|} \sum_{j=n_i}^{m_i} \omega_j > p + \epsilon
+                \end{equation*}
+            \end{itemize}
+        \end{itemize}
+    \end{lemma}
+    This basic lemma leads to our desired contradiction.
+    \\As a matter of fact, if $\omega_1^n \in \mathcal{G}_N$ then 
+    \begin{equation*}
+        \sum_{j=1}^N \omega_j \geq \sum_i \sum_{j=n_i}^{m_i} \omega_j \geq (1 - \delta) N (p + \epsilon)
+    \end{equation*}
+    hence
+    \begin{equation*}
+        p = \mathbb{E} \bigg[ \frac{1}{N} \sum_{j=1}^N X_j \bigg] \geq (1 - \delta) (p + \epsilon) \mu(\mathcal{G}_N) \geq (1 - \delta)^2 (p+\epsilon)
+    \end{equation*}
+    which can not be true for all $\delta$.
+\end{proof}
+Let's now see for completeness the proof of the Lemma:
+\begin{proof}[proof of Lemma \ref{lemma:ergodic_th}]
+    The first observation is that the lengths $L_n = ( m(n) -n +1 )$ of the intervals where the average is larger then $p + \epsilon$ is in fact bounded, except for a set of (arbitrary) small probability.
+    \\Namely, there exists an $L$ such that $\mu(L_n > L) < \delta^2/2$.
+    \\We now define $c_n$ to be $1$ if $L_n>L$ and $0$ otherwise, so that, for any $N$,
+    \begin{equation*}
+        \mathbb{E} \bigg[ \frac{1}{N} \sum_{n=1}^N c_n \bigg] < \frac{\delta^2}{2}
+    \end{equation*}
+    The Markov inequality (\ref{lemma:markov_ineq}) yields:
+    \begin{equation*}
+        \mu \bigg( \frac{1}{N} \sum_{n=1}^N c_n < \frac{\delta^2}{2} \bigg) > 1 - \delta
+    \end{equation*}
+    For $N>L$ we define $\mathcal{G}_N$ to be the event
+    \begin{equation*}
+        \frac{1}{N-L+1} \sum_{n=1}^{N-L+1} c_n < \frac{\delta}{2}.
+    \end{equation*}
+    The Markov inequality gives the first property of the basic Lemma.
+    \\For each $(\omega_1, \dots, \omega_N) \in \mathcal{G}_N$ we define the intervals $[n_j, m_j]$ inductively, putting 
+    \begin{equation*}
+        n_1 = \min \{ n \geq 1: L_n \leq L \}, \quad m_1 = m(n_1)
+    \end{equation*}
+    and 
+    \begin{equation*}
+        n_{j+1} = \min \{ n > m_j : L_n \leq L \}, \quad m_{j+1} = m(n_{j+1}).
+    \end{equation*}
+    i.e.,  we go from a covering to a packing with gaps. The construction stops the first time $m_j$ exceeds $N-L+1$.
+    \\The first of the second properties of the Basic Lemma is now true by definition of $n_j$ and $m_j$.
+    \\An integer $n$ in $[1,N]$  fails to be in one of the intervals $[n_j, m_j]$ only if $L_n > L$ or if $n > N - L + 1$.
+    \\By definition of $\mathcal{G}_N$ there are at most $N\delta/2$ indices $n$ in $[1,N]$ for which $L_n > L$.
+    \\Furthermore if we choose $N \geq 2L/\delta$ then $N-L+1, N$ contains at most $N\delta/2$ integers.
+\end{proof}
+
+\section{From coverings to packings}
+Now we want to discuss four Lemmas\footnote{From now on, this is \textbf{additional and optional material}} : the packing Lemma, the counting
+Lemma, the doubling Lemma and the strong doubling Lemma; the first two are strictly combinatorial, while the second two are just extensions of the Ergodic Theorem.
+\\The word doubling come from the fact that the applications of these
+lemmas rely on the success on some other limit theorem, a
+convergence-in-probability theorem for doubling and an almost-sure theorem for strong doubling. 
+\\At the end we will then introduce, discuss and prove the so called strong packing lemma that will be used in the proof of the optimality of the Lempel-Ziv code.
+
+\subsection{Packing and counting}
+The packing technique is a method for building ``almost'' packings of intervals from ``almost" covering by subintervals whose left end points already cover most of the interval. 
+\\In more mathematical terms: 
+\begin{definition}
+    \hfill
+    \\Given an interval of integers $[1, N]$ and a collection $\mathcal{C}$ of distinct subintervals, $\mathcal{C}= \{ n_j, m_j \}$ with $1 \leq n_j \leq m_j \leq N$, we say that
+    \begin{itemize}
+        \item[(1)] $\mathcal{C}$ is called a \textbf{strong} $\bm{1 - \delta}$- \textbf{cover} of $[1, N]$ if the left points cover at least a $1- \delta$ fraction of $[1, N]$:
+        \begin{equation*}
+            |\{ n_j : [n_j, m_j] \in \mathcal{C} \}| > (1 - \delta)N \,.
+        \end{equation*}
+        \item[(2)] $\mathcal{C}$ is called a $\bm{1 - \delta}$- \textbf{packing} if it is \textbf{disjoint} and its union cover at least $(1 - \delta)$-fraction of $[1,N]$:
+        \begin{equation*}
+            \sum_{[n_j, m_j] \in \mathcal{C}} |(m_j - n_j + 1)| \geq (1 - \delta)N \, .
+        \end{equation*}
+        \item[(3)] $\mathcal{C}$ is $\bm{L-}$ \textbf{bounded}  if $|(m_j - n_j +1 )| \leq L$, for each $[n_j, m_j] \in \mathcal{C}$
+    \end{itemize}
+\end{definition}
+\begin{lemma}[The packing lemma]
+\hfill\\
+    if $N \geq L/\delta$, then any $L-$bounded, strong $1-\delta$ cover $\mathcal{C}$ of $[1,N]$ contains a $(1- 2\delta)-$packing.
+\end{lemma}
+The next counting lemma gives us bounds on the number of sequences that are mostly packed by block drawn from fixed collections whose size are known, which we usually consider to be the collections of typical sequences provided by the AEP theorem, or similar.
+\\First we need few notations: let $\delta$ and $M$ be positive numbers: for each $m \geq M$, we have subsets $\mathcal{B}_m \subset \alp^m$ and we denote 
+\begin{equation*}
+    \mathcal{B}_M = \cup_{m \geq M} \mathcal{B}_m
+\end{equation*}
+Then we define:
+\begin{definition}
+    A sequence $x_1^N \in \alp^N$ is said to be $(1- \delta)-$built-up from $\mathcal{B}$ if it can be parsed in variable length blocks as 
+    \begin{equation}
+        x_1^N= b_1b_2\dots b_k, \quad \text{s.t.} \, \, \sum_{j: b_j \in \mathcal{B}} |b_j| \geq (1-\delta)N
+    \end{equation}
+\end{definition}
+We denote by $G_N$ the subset of $\alp^N$ given by the sequences $x_1^N$ that are $(1-\delta)-$built-up from $\mathcal{B}_M$ .
+\begin{lemma}[The Counting Lemma]
+\hfill \\
+    If $|\mathcal{B}_m| \geq 2^{m (h+\epsilon)}$, $h_b(2/M) \leq \epsilon/2$ and $\delta \log |\alp| \leq \epsilon/2$, then 
+    \begin{equation*}
+        |G_N| \leq 2^{N(h + 2\epsilon)}\, .
+    \end{equation*}
+\end{lemma}
+where 
+\begin{equation}
+\label{eq:binary_entropy}
+    h_b(p) = -p \log p - (1-p) \log(1-p)
+\end{equation}
+denotes the binary entropy function.
+\begin{proof}
+    \hfill \\
+    We first condition on the locations of the blocks that belong to $\mathcal{B}_M$: a \textbf{skeleton} $\mathcal{P}= \{ [n_j, m_j] \}$ is a disjoint collection of subintervals such that
+    \begin{itemize}
+        \item[a)] $[n_j, m_j] \subset [1,N]$ and $ (m_j - n_j + 1) \geq M$;
+        \item[b)] $\sum_{[n_j, m_j] \in \mathcal{P}} (m_j - n_j + 1) \geq (1 - \delta) N $  . 
+    \end{itemize}
+    We now say that $x_1^N \in G_N$ is compatible with the skeleton $\mathcal{P}$  if the word $x_i^j$ belongs to $\mathcal{B}_M$ whenever the interval $[i,j]$ belongs to $\mathcal{P}$, and we denote by $G_N(\mathcal{P}) \subset G_N$ the set of all the sequences compatible with the skeleton $\mathcal{P}$. \\
+    Clearly,
+    \begin{equation*}
+        G_N \equiv \cup_{\mathcal{P}} G_N (\mathcal{P}) \, .
+    \end{equation*}
+    It is now easy to see that:
+    \begin{equation*}
+        |G_N (\mathcal{P})| \leq 2^{N (h+\epsilon)} |\alp|^{\delta N} \, .
+    \end{equation*}
+    The first term $2^{N (h+\epsilon)}$ come from the fact that any subinterval $[i, j]$ of length $m$ can be filled in at most $2^{m (h+\epsilon)} \geq |\mathcal{B}_M|$ ways, whereas there are at most $|\alp|^{\delta N}$ ways to fill the places that do not belong to $\mathcal{P}$.\\
+    Each interval in a skeleton has length at least $M$, so at most $2N/M$ points can be endpoints of its intervals. Thus the number of possible skeletons is upper bounded by
+    \begin{equation*}
+        \sum_{j \leq 2N/M} 
+        \begin{pmatrix}
+            N \\
+            j
+        \end{pmatrix}
+        \leq 2^{N h_b (2/M)}
+    \end{equation*}
+    The set $G_N$ is the union of the sets $G_N(\mathcal{P})$ over all skeletons $\mathcal{P}$, so the cardinality of $G_N$ is upper bounded by the product of the two previous bounds, that is
+    \begin{equation*}
+        \log |G_N| \leq N (h + \epsilon) + \delta N \log |\alp| + N h_b (2/M) \, .
+    \end{equation*}
+    This is bounded by $N (h + 2\epsilon)$ if $h_b (2/M) \leq \epsilon/2$ and $\delta \log |\alp|$ .
+\end{proof}
+
+\subsection{Doubling}
+We now want to prove that in certain situations, given sequences of blocks $\mathcal{B}_n \subset \alp^n$ provided by some convergence in probability limit theorem, eventually almost surely, most indices in $x_1^N$ are in fact starting points of blocks from the $\mathcal{B}_n$'s.
+\begin{lemma}[Doubling Lemma]
+    \hfill \\
+    If $\mu(\mathcal{B}_n) > 1 - \delta/2$ then, eventually almost surely as $N \rightarrow \infty$
+    \begin{equation*}
+        x_j^{j+n-1} \in \mathcal{B}_n \quad \text{for at least $(1-\delta)N$ indices $j \in [1, N-n+1]$}
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Given $x \in \alp^{\nb}$, the number of indices $j \in [1, N-n+1]$ for which $x_j^{j+n-1} \in \mathcal{B}_n$ is given by 
+    \begin{equation*}
+        \sum_{j=1}^{N-n+1} \chi_{U_n} (\sigma^{j-1} x)
+    \end{equation*}
+    where 
+    \begin{equation*}
+        U_n \equiv \{ x : x_1^k \in \mathcal{B}_k \}
+    \end{equation*}
+    By the ergodic theorem, almost surely,
+    \begin{equation*}
+        \lim_{n \rightarrow \infty} \frac{1}{N-n+1} \sum_{j=1}^{N-n+1} \chi_{U_n} (\sigma^{j-1} x) = \mu(U_n) = \mu(\mathcal{B}_n) > 1 - \frac{\delta}{2} \, .
+    \end{equation*}
+\end{proof}
+In applications, often some almost sure limit Theorems provide a sequence of set $\mathcal{B}_n \in \alp^n$ such that $x_1^n \in \mathcal{B}_n$ eventually almost surely.
+\\In this case we can prove that every block in $x_1^n$ that starts at $j$ and has length larger than $n$ belongs to $\cup_{i \geq n} \mathcal{B}_i$
+\begin{lemma}[Strong-Doubling Lemma]
+    \hfill \\
+    If $x_1^n \in \mathcal{B}_n$, eventually almost surely as $n \rightarrow \infty$, then given $\delta>0$  there is an $N$ such that, eventually almost surely as $N \rightarrow \infty$, we have that
+    \begin{equation*}
+        x_j^{j+n-1} \in \mathcal{B}_n \, , \quad x_j^{j+n} \in \mathcal{B}_{n+1}, \dots, x_j^N \in \mathcal{B}_{N-j+1}
+    \end{equation*}
+    holds for $x_1^n$ for at least $(1 - \delta)N$ indices $j \in [1, N-n+1]$
+\end{lemma}
+\begin{proof}
+    \hfill \\
+    The assumption $x_1^n \in \mathcal{B}_n$, eventually almost surely, implies that for $n$ large enough $\mu(U_n) > 1 - \delta/4$, where
+    \begin{equation*}
+        U_n \equiv \{ x : x_1^j \in \mathcal{B}_j, \, \forall \, j \geq n \} \, .
+    \end{equation*}
+    Again from the Ergodic Theorem, 
+    \begin{equation*}
+        \lim_{n \rightarrow \infty} \frac{1}{N-n+1} \sum_{j=1}^{N-n+1} \chi_{U_n} (\sigma^{j-1} x) = \mu(U_n)
+    \end{equation*}
+    so that, in particular,
+    \begin{equation}
+    \label{eq:strong_doubling}
+         \frac{1}{N-n+1} \sum_{j=1}^{N-n+1} \chi_{U_n} (\sigma^{j-1} x) \geq 1 - \frac{\delta}{2}, \quad \text{eventually almost surely as $N \rightarrow \infty$}
+    \end{equation}
+    Suppose \ref{eq:strong_doubling} holds for a given $N$.
+    \\This means that $\sigma^{j-1} x \in U_n$ for at least $(1 - \delta/2)N$ indices $j \in [1, N - n+1]$, namely, all blocks in the infinite sequence $x$ that start at $j$ and have length at least $n$ must belongs to $\cup_{j \geq n} \mathcal{B}_j$.
+    \\In particular, if $\sigma^{j-1} x \in U_n$ and $j \geq N-n$, then all blocks in the finite sequence $x_1^N$ that starts at $j$ and have length at least $n$ must belong to $\cup_{j \geq n} \mathcal{B}_j$. 
+    \\If $N \geq 2n/\delta$ there will be at most $\delta N/2$ indices in the interval $[N-n+1,N]$.
+    \\Thus, if \ref{eq:strong_doubling} holds and $N \geq 2n/\delta$, then for $x_1^N$ the strong doubling condition must
+    hold for at least $(1 - \delta)N$ indices $j \in [1, N-n+1]$.
+    \\This proves the lemma since \ref{eq:strong_doubling} holds eventually almost surely as $N \rightarrow \infty$.
+\end{proof}
+Now we can finally prove the Entropy Theorem:
+\begin{proof} [proof of Th. \ref{th:entropy_theorem} (Entropy Theorem)]
+\hfill \\
+    Define $h(x) = \liminf_{n \rightarrow \infty} \log \mu(x_1^n)$.
+    \\Since $h(\sigma x) \leq h(x)$ and because of ergodicity, $h(x) = h$ is constant almost surely. 
+    \\We want to prove that also 
+    \begin{equation*}
+        h = \limsup_{n \rightarrow \infty} -\frac{1}{n} \log \mu(x_1^n) \, .
+    \end{equation*}
+    Fix $\epsilon > 0$; by the definition of $\liminf$ and taking the exponential:
+    \begin{equation}
+    \label{eq:proof_of_entropy_th}
+        \mu(x_1^n) \geq 2^{-n (h+\epsilon)}, \quad \text{infinitely often, almost surely}.
+    \end{equation}
+    The main idea of the proof is to show that, eventually almost surely, as $N \rightarrow \infty$, most indices $j \in [1, N]$ are starting places of blocks in $x_1^N$ for which $\mu(x_j^{j+N-1}) \geq 2^{-n(h+\epsilon)}$ for some $n \leq N-j$.
+    \\Then we will use the packing lemma to extract an almost packing and the counting lemma to show that the set of $N-$sequences that have such an almost packing cannot have cardinality exponentially much bigger than $2^{N(h+\epsilon)}$.
+    \\Even if \ref{eq:proof_of_entropy_th} does not give us any control on $n$, starting at $j$, the waiting time $n$ until $\mu(x_j^{j+n-1}) \geq 2^{-n(h+\epsilon)}$ occurs is  almost surely finite, and therefore is bounded except for a set of small probability.
+    
+    Let $M$ so that $h_b(2/M) \leq \epsilon/2$ (again, $h_b$ represents binary entropy as in \ref{eq:binary_entropy} and we fix $\delta>0$ such that $\delta \log |\alp| \leq \epsilon/2$). 
+    \\Let $L \ geq M$ be an integer to be specified later, and let $\mathcal{B}= \cup_{M \leq n \leq L} \mathcal{B}_n$ where
+    \begin{equation*}
+        \mathcal{B}_n = \{ x_1^n : \mu(x_1^n) \geq 2^{-n(h+\epsilon)}\} \subset \alp^n \, .
+    \end{equation*}
+    Finally, for $N \geq L$, we let 
+    \begin{equation*}
+        G_N \equiv \{ x_1^n \in \alp^N : x_1^n \, \text{is} \,\, (1-\delta)- \text{built up from $\mathcal{B}$}\} \, .
+    \end{equation*}
+    Since $|\mathcal{B}_n| \leq 2^{n(h+\epsilon)}$, the counting lemma implies that 
+    \begin{equation*}
+        |G_N| \leq 2^{N(h + 2\epsilon)} \, .
+    \end{equation*}
+    Then the following lemma (which we will prove later on)
+    \begin{lemma}
+    \label{lemma:proof_entropy_th}
+        \hfill \\
+        If $L$ is large enough, then $x_1^N \in G_N$, eventually almost surely.
+    \end{lemma}
+    implies that
+    \begin{equation*}
+        \mu(V_n) \leq |G_n| 2^{-n(h+3\epsilon)}
+    \end{equation*}
+    where 
+    \begin{equation*}
+        V_n \equiv \{ x_1^n \in G_n : \mu(x_1^n) \leq 2^{-n()h+3\epsilon} \}
+    \end{equation*}
+    Now because $\sum_n \mu(V_n) < \infty$, by the Borel-Cantelli principle (\ref{lemma:borel_cantelly}) $x_1^n \notin V_n$ eventually almost surely, which, since $x_1^n \in G_n$ eventually almost surely, implies that $\mu(x_1^n) \geq 2^{-n(h+3\epsilon)}$ eventually almost surely.
+    \\This means that $h = \limsup_{n \rightarrow \infty} -\frac{1}{n} \log \mu(x_1^n)$, with probability $1$, and the Entropy Theorem is proved.
+\end{proof}
+We give now the proof of the Lemma \ref{lemma:proof_entropy_th}.
+\begin{proof}[proof of \ref{lemma:proof_entropy_th}]
+\hfill \\
+    Let’s go back to the proof of the previous lemma: we must show how $L \geq M$ can be chosen so that $x_1^N \in G_N$ , eventually almost surely.
+    \\The random variable $n(x)$, given by the least integer $n \geq M$ for which $x_1^n \in \mathcal{B}$ is almost surely finite.
+    \\Thus we can choose $L \geq M$ such that $n(x) \leq L$, with probability at least $1 - \delta/4$.
+    \\This means that the set 
+    \begin{equation*}
+        U_L = \{ x_1^L : x_1^j \\in \mathcal{B}_j, \, \text{for some $j \in [M, L]$} \}
+    \end{equation*}
+    has measure at least $1 - \delta/4$
+    \\Applying the doubling lemma to the set $U_L \subseteq \alp^L$ we get that for $x_1^N$ eventually almost surely as $N \rightarrow \infty$ there will be at least $(1 - \delta/2)N$ indices $j \in [1, N-L+1]$ for which $x_j^{j+L-1} \in U_L$.
+    \\Then the collection $\{ [i,j] : x_i^j \in \mathcal{B} \}$ is an $L-$bounded, strong $(1- \delta/2)-$cover of $[1,N]$, so that once $N$ is large enough to satisfy $N \geq 2L/\delta$, the packing lemma implies that $x_1^N$ is $(1 -\delta)-$built up from $\mathcal{B}$, that is, $x_1^N \in G_N$.
+    \\This proves the lemma and completes the proof of the Entropy Theorem.
+\end{proof}
+
+\subsection{Strong-packing}
+We need to strength further the packing results in order to be able to prove the optimality of the \textit{Lempel-Ziv codes}.
+\begin{definition}[word and parsing]
+\hfill \\
+    A finite sequence $\omega$ is called a word of length $|\omega|$ (we already introduced this) and a \textbf{parsing} of $x_1^n$ is an ordered collection $\mathcal{P} = \{ \omega(1), \omega(2), \cdots, \omega(t) \}$ of words for which 
+    \begin{equation*}
+        x_1^n = \omega(1) \omega(2) \cdots \omega(t)
+    \end{equation*}
+\end{definition}
+\begin{definition}[Strong-Packing]
+\hfill\\
+    Fix a sequence of sets $\{\mathcal{T}_k \}$, such that $\mathcal{T}_k \subseteq \alp^k$, for $k \geq 1$. 
+    \\A parsing $x_1^n = \omega(1) \omega(2) \cdots \omega(t)$ is $(1 - \epsilon)-$built up from $\{\mathcal{T}_k \}$, or $(1 - \epsilon)-$packed by $\{\mathcal{T}_k \}$, if the words that belong to $\cup \mathcal{T}_k$ cover at least $(1 - \epsilon)-$fraction of $n$, i.e.
+    \begin{equation*}
+        \sum_{\omega(j) \in \cup \mathcal{T}_k} |\omega(j)| \geq (1 - \epsilon) n \, .
+    \end{equation*}
+    A sequence $x_1^n$ is $(K, \epsilon)-$strongly-packed by $\{\mathcal{T}_k \}$ if \textbf{any} parsing $x_1^n = \omega(1) \omega(2) \cdots \omega(t)$ for which 
+    \begin{equation*}
+        \sum_{|\omega_j| < K} |\omega_j| \leq \frac{\epsilon n}{2} \, ,
+    \end{equation*}
+    is $(1 - \epsilon)-$built-up from $\{\mathcal{T}_k \}$.
+\end{definition}
+Strong-packing captures the essence of the idea that if the long words of a parsing cover most of the sample path, those long words that come from fixed collections  $\{\mathcal{T}_k \}$ must cover most of the sample path.
+\\The key result is the existence of collections for which the $\mathcal{T}_k$’s are of exponential size determined by entropy and such that eventually almost
+surely $x_1^n$ is almost strongly-packed.
+\begin{lemma}[Strong-packing lemma]
+    Let $\mu$ be an ergodic process of entropy $h=h_\mu$ and let $\epsilon$ be a positive number.
+    \\There is an integer $K=K(\epsilon)$ and, for each $k\geq K$, a set $\mathcal{T}_k = \mathcal{T}_k(\epsilon) \subseteq \alp^k$, such that both of the following hold:
+    \begin{itemize}
+        \item[(1)] $|\mathcal{T}_k| \leq 2^{k(h+ \epsilon)}$ for $k \geq K$;
+        \item[(2)] $x_1^n$ is eventually almost surely $(K, \epsilon)-$strongly-packed by $\{\mathcal{T}_k \}$.
+    \end{itemize}
+\end{lemma}
+The proof is a little bit complex but the idea behind it is kind of simple.
+\\The entropy theorem provides an integer $m$ and a set $C_m \subseteq \alp^m$ of measure close to $1$ and cardinality at most $2^{m(h+ \delta)}$.
+\\By the Ergodic Theorem, eventually almost surely most indices in $x_1^n$ are starting places of $m-$blocks from $C_m$.
+\\But if such an $x_1^n$ is partitioned into words, then by the Markov inequality (\ref{lemma:markov_ineq}) most of $x_1^n$ must be covered by those words whihc themselves have the property that most of their indices are starting places of members of $C_m$.
+\\If a word is long enough, however, and most of its indices are starting places of members of $C_m$, then the word is mostly built-up from $C_m$, by the packing lemma.
+\\The collection $\mathcal{T}_k \subseteq \alp^k$ of words that are mostly built up from $C_m$ has cardinality only a small exponential factor more than $2^{k(h+\delta)}$ (by the built-up set lemma).
+\\Let's be more rigorous:
+\begin{proof}
+    Fix $\epsilon>0$, and let $\delta>0$ to be specified later on.
+    \\The entropy theorem provides an $m$ for which the set 
+    \begin{equation*}
+        C_m \equiv \{ a_1^m  : \mu(a_1^m) \geq 2^{-m(h+\delta)}\}
+    \end{equation*}
+    has measure at least $1-\delta^2/4$.
+    \\For $k \geq m$, let $\mathcal{T}_k$ be the set of sequences of length $k$ that are $(1-\delta)-$built-up from $C_m$.
+    By the built-up set lemma, it can be supposed that $\delta$ is small enough to guarantee that 
+    \begin{equation*}
+        |\mathcal{T}_k| \leq 2^{k(h+\epsilon)}, \quad k \geq m \, .
+    \end{equation*}
+    By making $\delta$ smaller, if necessary, it can be supposed that $\delta < \epsilon/2$.
+    \\It remains to show that eventually almost surely $_1^n$ is $(K, \epsilon)-$strongly-packed by $\{ \mathcal{T}_k\}$, for suitable $K$.
+    \\This is a consequence of the following three observations
+    \begin{itemize}
+        \item[1)] The ergodic theorem implies that for almost every $x$ there is an $N=N(x)$ such that for  $n \geq N$ the sequence $x_1^n$ has the property that $x_j^{j+m-1} \in C_m$ for at least $(1 - \delta^2/2)n$ indices $j \in [1, n-m+1]$, i.e., $x_1^n$ is $(1 - \delta^2/2)-$strongly-covered by $C_m$.
+        \item[2)] If $x_1^n$ is $(1 - \delta^2/2)-$strongly-covered by $C_m$ and parsed as $x_1^n = \omega(1) \omega(2) \cdots \omega(t)$, then by the Markov inequality, the words $\omega(j)$ that are not $(1 - \delta/2)-$strongly-covered by $C_m$ cannot have total length more than $\delta n \leq \epsilon n /2$.
+        \item[3)] If $\omega(j)$ is $(1 - \delta/2)-$strongly-covered by $C_m$, and if $|\omega(j)| \geq 2/\delta$, then by the packing lemma $\omega(j)$ is $(1 - \delta)-$packed by $C_m$, that is, $\omega(j) \in \mathcal{T}_{|\omega(j)|}$.
+    \end{itemize}
+    From the preceding it is enough to take $K\geq 2/\delta$, because if this is fulfilled and we have also that $n \geq N(x)$ and that the parsing $x_1^n = \omega(1) \omega(2) \cdots \omega(t)$ satisfies 
+    \begin{equation*}
+        \sum_{|\omega(j)| < K} |\omega(j)| \leq \frac{\epsilon n}{2},
+    \end{equation*}
+    then the set of $\omega(j)$ for which $|\omega(j)| \geq K$ and $|\omega(j)| \in \cup \mathcal{T}_k$ must have total length at least $(1-\epsilon)n$.
+    \\This completes the proof of the lemma.
+\end{proof}

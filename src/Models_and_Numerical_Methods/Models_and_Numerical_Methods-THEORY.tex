@@ -1,0 +1,147 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+%use british to avoid words separating randomly at the end of lines:
+\usepackage[british]{babel}
+
+\usepackage[toc,page]{appendix}
+
+%plots
+\usepackage{pgfplots}
+\pgfplotsset{width=8cm,compat=1.9}
+%reducing graph compilation time
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+%multi-line comments
+\usepackage{comment}
+
+%simboli matematici in più
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+
+% bold greek symbols
+\usepackage{bm}
+
+%code listing:
+\usepackage{listings}
+%listing style:
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle,
+moredelim=**[is][\color{blue} ]{@}{@}
+}
+
+%indexing theorems
+\usepackage{amsthm}
+%bold names for theorems 
+\makeatletter
+\def\th@plain{%
+  \thm@notefont{}% same as heading font
+  \itshape % body font
+}
+\def\th@definition{%
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\makeatother
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{remark}[section]{Remark}
+
+%references
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefformat{section}{\S#2#1#3}
+\crefformat{subsection}{\S#2#1#3}
+\crefformat{subsubsection}{\S#2#1#3}
+\crefrangeformat{section}{\S\S#3#1#4 to~#5#2#6}
+\crefmultiformat{section}{\S\S#2#1#3}{ and~#2#1#3}{, #2#1#3}{ and~#2#1#3}
+
+%bibliography
+\usepackage[numbers]{natbib}
+\bibliographystyle{unsrtnat}
+
+%captions, figure and colors
+\usepackage{graphicx}
+\graphicspath{ {./img/}}
+\usepackage[export]{adjustbox}
+\usepackage[font=small,labelfont=bf, tableposition=top]{caption}
+\usepackage[font=small]{subcaption}
+
+%defining new commands
+\newcommand{\Ex}{\`E\:}
+\newcommand{\One}{\mathds{1}}
+\newcommand{\rb}{\mathbb{R}}
+\newcommand{\nb}{\mathbb{N}}
+\newcommand{\zb}{\mathbb{Z}}
+\newcommand{\Id}{\mathds{I}}
+\newcommand{\de}{\partial}
+\newcommand{\man}{\mathcal{M}}
+\newcommand{\alp}{\mathcal{A}}
+\newcommand{\ent}{\mathcal{S}}
+
+%geometry of pages
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{titlesec}
+
+\geometry{
+	paper=a4paper, 
+	inner=2.5cm, % Inner margin
+	outer=3cm, % Outer margin
+	bindingoffset=0.5cm, % Binding offset
+	top=2.5cm, % Top margin
+	bottom=3cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+\title{\textbf{Entropic Information Theory}}
+
+\author{Matteo Falcioni \\ \url{https://github.com/Grufoony/Physics_Unibo}}
+\date{}
+\begin{document}
+
+\maketitle
+%eq. numerate per sezioni (3.1, 3.2...)
+\numberwithin{equation}{section} 
+
+%numbering pages + table of contents
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\tableofcontents{}
+
+\include{./tex/chapter1.tex}
+\include{./tex/chapter2.tex}
+\include{./tex/chapter3.tex}
+\include{./tex/chapter4.tex}
+
+\bibliography{./tex/reference}
+
+\end{document}
