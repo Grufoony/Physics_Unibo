@@ -1393,3 +1393,36 @@ $$
 \notedate{(XII) MON (ex.3) 12/12/2022}
 \notedate{(XIII) MON (ex.4) 19/12/2022}
 \subsection{Exercise (2.5): Gas of photons}
+Let us consider a gas of photons, confined in a volume $V$ at equilibrium at a temperature $T$.
+Photons are ultra-relativistic bosonic particles, for which: $\epsilon_{\vec p} = c|\vec p|$. They can be absorbed/emitted so that their particle number is not conserved, providing an example of bosonic systems with zero chemical potential: $\mu(T) \equiv 0$. Recall also that photons have two independent polarizations, so that g = 2.
+\begin{enumerate}
+    \item \textbf{Density of states:}\\
+    The density of states is easily obtained from $$\Sigma(\epsilon) = g\int_{cp < \epsilon} \frac{d^3 x\ d^3p}{h^3} = \frac{8\pi V}{h^3} \int_0^{\epsilon/c} dp \ p^2 = \frac{8\pi V}{3(hc)^3}\epsilon^3$$
+    since $\omega (\epsilon) = \partial\Sigma / \partial \epsilon$.
+    \item \textbf{Granpotential, number of particles, internal energy}\\
+    From the previous point it follows that:
+    $$\Omega = \frac 1\beta \int_0^\infty d\epsilon \ \omega(\epsilon) \log(1-e^{\beta \epsilon}) = -\frac{8\pi V}{3(hc)^3} \int_0^\infty \frac{\epsilon^3}{e^{\beta \epsilon} - 1} d\epsilon$$
+    where the last equality has been found after integration by parts.\\Similarly, one gets:
+    $$ N = \int_0^\infty d\epsilon \ \omega(\epsilon) n(\epsilon) = \frac{8\pi V}{(hc)^3} \int_0^\infty \frac{\epsilon^2}{e^{\beta \epsilon}-1} d\epsilon$$
+    $$ E= \int_0^\infty d\epsilon \ \omega(\epsilon)\epsilon n(\epsilon) = \frac{8\pi V}{(hc)^3} \int_0^\infty\frac{\epsilon^3}{e^{\beta \epsilon}-1}d\epsilon$$
+    From the relation $\Omega = -pV$ it follows that: $p = \frac 13 \frac EV$
+    \item \textbf{Density of energy and particles}\\
+    Using the relation 
+    $$\int_0^\infty \frac{x^n}{e^x -1}dx = \zeta(n+1)$$
+    we can show that:
+    $$ \frac NV = \frac{8\pi \zeta(3)}{(hc)^3} (k_BT)^3$$
+    $$ \frac EV = \frac{8\pi\zeta(4)}{(hc)^3}(k_BT)^4$$
+    Also, as a consequence of $C_V = \partial E / \partial T$, we have: $c_v = \frac{C_V}V \propto T^3$
+    \item \textbf{Spectral distribution and density}
+    Recalling that the energy of a photon is related to the frequency through: $\epsilon = h\nu$, we can consider the number of photons $N(\nu)$ with an energy $0 \le \epsilon \le h\nu$, given by:
+    $$ N(\nu) = \frac{8\pi V}{(hc)^3} \int_0^{hv} \frac{\epsilon^2}{e^{\beta \epsilon}-1}d\epsilon$$
+    We can calculate the spectral distribution:
+    $$f(\nu) = \frac{dN(\nu)}{d\nu} = \frac{8\pi V}{(\beta h c)^3}\frac{(\beta h \nu)^2}{e^{\beta h \nu}-1} \beta h = \frac{8\pi V}{c^3}\frac{v^2}{e^{\beta h v}-1}$$
+    This represents the number of photons with frequency between $\nu$ and $\nu + d\nu$.
+    We can also show that the energy spectral density (defined as the energy for unit frequency and volume) is:
+    $$u(\nu) = \frac{8\pi h}{c^3} \frac{\nu^3}{e^{\beta h \nu}-1}$$
+    \item \textbf{Wein's and Rayleigh-Jeans' laws}\\
+    Rayleigh-Jeans' law is obtained by expanding the exponential function in the denominator at first order, while Wien's law is got by neglecting the addend -1 in the denominator:
+    $$u(\nu) \simeq 8\pi h\left(\frac vc\right)^3 e^{-\beta h \nu} \qquad \beta h \nu \gg 1$$
+    $$ u(\nu) \simeq \frac{8\pi h}{c^3} \frac{\nu^3}{\beta h \nu} = \frac{8\pi}{c^3\beta} \nu^2 \qquad \beta h \nu \ll 1$$
+\end{enumerate}
