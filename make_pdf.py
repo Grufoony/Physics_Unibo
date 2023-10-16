@@ -31,6 +31,10 @@ Models = [
     'GAN',
 ]
 
+Quantum_Computing = [
+    "prerequisites",
+]
+
 out_notebook = nbformat.v4.new_notebook()
 subject = sys.argv[1].lower()
 outext = ".pdf"
@@ -43,6 +47,10 @@ elif subject == 'pr':
 elif subject == 'mnm':
     files = Models
     outfile = 'Models_and_Numerical_Methods'
+    outext = "-LAB.pdf"
+elif subject == 'qc':
+    files = Quantum_Computing
+    outfile = 'Quantum_Computing'
     outext = "-LAB.pdf"
 
 for file in files:
