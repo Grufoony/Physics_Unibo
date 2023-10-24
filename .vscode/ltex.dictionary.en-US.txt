@@ -33,3 +33,5 @@ GAN
 denoising
 GANs
 qubit
+qubits
+eigenstate
