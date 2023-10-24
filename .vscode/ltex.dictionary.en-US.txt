@@ -32,3 +32,4 @@ deconvolution
 GAN
 denoising
 GANs
+qubit
