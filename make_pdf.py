@@ -33,6 +33,8 @@ Models = [
 
 Quantum_Computing = [
     "prerequisites",
+    "teleportation",
+    "phase_estimation",
 ]
 
 out_notebook = nbformat.v4.new_notebook()
