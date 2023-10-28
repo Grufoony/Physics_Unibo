@@ -35,3 +35,4 @@ GANs
 qubit
 qubits
 eigenstate
+transpile
